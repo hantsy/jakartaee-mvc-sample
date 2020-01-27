@@ -6,22 +6,20 @@
     <c:if test="${not empty flashMessage and not empty flashMessage.text}">
         <div class="alert alert-${flashMessage.type} alert-dismissible"
              role="alert">
-            <button type="button" class="close" data-dismiss="alert"
-                    aria-label="Close">
-                <span aria-hidden="true">x</span>
-            </button>
-            <p>${flashMessage.text}</p>
+             ${flashMessage.text}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span class="fa fa-times-circle" aria-hidden="true">${null}</span>
+            </button>         
         </div>
     </c:if>
     <c:if test="${not empty errors}">
         <c:forEach items="${errors.errors}" var="error">
             <div class="alert alert-danger alert-dismissible"
                  role="alert">
-                <button type="button" class="close" data-dismiss="alert"
-                        aria-label="Close">
-                    <span aria-hidden="true">x</span>
+                <strong>${error.field}</strong>: ${error.message}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span class="fa fa-times-circle" aria-hidden="true">${null}</span>
                 </button>
-                <p>${error.field}: ${error.message}</p>
             </div>
         </c:forEach>
     </c:if>
