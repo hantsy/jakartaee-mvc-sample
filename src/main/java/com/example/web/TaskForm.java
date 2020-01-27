@@ -3,7 +3,8 @@ package com.example.web;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.enterprise.context.RequestScoped;
-import javax.validation.constraints.NotNull;
+import javax.mvc.binding.MvcBinding;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 
@@ -12,13 +13,15 @@ public class TaskForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
+    @NotBlank
     @FormParam("name")
+    @MvcBinding
     private String name;
 
-    @NotNull
+    @NotBlank
     @Size(min = 10, max = 2000)
     @FormParam("description")
+    @MvcBinding
     private String description;
 
     public String getName() {

@@ -13,7 +13,9 @@ import javax.mvc.Controller;
 import javax.mvc.Models;
 import javax.mvc.View;
 import javax.mvc.binding.BindingResult;
+import javax.mvc.binding.MvcBinding;
 import javax.mvc.binding.ParamError;
+import javax.mvc.security.CsrfProtected;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.executable.ExecutableType;
@@ -86,8 +88,8 @@ public class TaskController {
     }
 
     @POST
-    //@CsrfValid
-    @ValidateOnExecution(type = ExecutableType.NONE)
+    //@CsrfProtected
+    //@ValidateOnExecution(type = ExecutableType.NONE)
     public Response save(@Valid @BeanParam TaskForm form) {
         log.log(Level.INFO, "saving new task @{0}", form);
 
@@ -109,7 +111,6 @@ public class TaskController {
         taskRepository.save(task);
 
         flashMessage.notify(Type.success, "Task was created successfully!");
-        //models.put("flashMessage", flashMessage);
 
         return Response.ok("redirect:tasks").build();
     }
@@ -138,7 +139,7 @@ public class TaskController {
                         alert.addError(t.getParamName(), "", t.getMessage());
                     });
             models.put("errors", alert);
-            return Response.status(BAD_REQUEST).entity("edit.jsp").build();
+            return Response.status(BAD_REQUEST).entity("edit.xhtml").build();
         }
 
         Task task = taskRepository.findById(id);
@@ -155,6 +156,7 @@ public class TaskController {
 
     @PUT
     @Path("{id}/status")
+    @CsrfProtected
     public Response updateStatus(@PathParam(value = "id") Long id, @NotNull @FormParam(value = "status") String status) {
         log.log(Level.INFO, "updating status of the existed task@id:{0}, status:{1}", new Object[]{id, status});
 

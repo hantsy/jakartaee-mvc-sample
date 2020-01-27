@@ -5,10 +5,8 @@
  */
 package com.example.domain;
 
-import static com.example.domain.Task.Status.TODO;
 import java.io.Serializable;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Objects;
 import java.util.function.Function;
 import javax.persistence.Column;
@@ -22,6 +20,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.time.LocalDateTime;
+import static com.example.domain.Task.Status.TODO;
 
 /**
  *
@@ -33,7 +33,7 @@ public class Task implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static enum Status {
-        TODO, DOING, DONE;
+        TODO,DOING, DONE;
     }
 
     public static Comparator<Task> COMPARATOR = Comparator
@@ -41,8 +41,9 @@ public class Task implements Serializable {
             .thenComparing(Task::getDescription);
 
     public static Function<Task, String> TO_STRING = t
-            -> "Task[name:" + t.getName()
-            + "\n description:" + t.getDescription()
+            -> "Post["
+            + "\n title:" + t.getName()
+            + "\n content:" + t.getDescription()
             + "\n status:" + t.getStatus()
             + "\n createdAt:" + t.getCreatedDate()
             + "\n lastModifiedAt:" + t.getLastModifiedDate()
@@ -62,13 +63,11 @@ public class Task implements Serializable {
     @Column(name = "status")
     private Status status = TODO;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_modified_date")
-    private Date lastModifiedDate;
+    private LocalDateTime lastModifiedDate;
 
     public Long getId() {
         return id;
@@ -102,19 +101,19 @@ public class Task implements Serializable {
         this.status = status;
     }
 
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getLastModifiedDate() {
+    public LocalDateTime getLastModifiedDate() {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(Date lastModifiedDate) {
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 
@@ -165,12 +164,12 @@ public class Task implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        this.setCreatedDate(new Date());
+        this.setCreatedDate(LocalDateTime.now());
     }
 
     @PreUpdate
     public void preUpdate() {
-        this.setLastModifiedDate(new Date());
+        this.setLastModifiedDate(LocalDateTime.now());
     }
 
 }

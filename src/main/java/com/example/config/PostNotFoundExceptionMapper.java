@@ -20,17 +20,19 @@ import javax.ws.rs.ext.Provider;
  * @author hantsy
  */
 @Provider
-public class TaskNotFoundExceptionMapper implements ExceptionMapper<TaskNotFoundException>{
-    
+public class PostNotFoundExceptionMapper implements ExceptionMapper<TaskNotFoundException> {
+
     @Inject Logger log;
-    
-    @Inject Models models;
+    //private static Logger log = Logger.getLogger(PostNotFoundExceptionMapper.class.getName());
+
+    @Inject
+    Models models;
 
     @Override
     public Response toResponse(TaskNotFoundException exception) {
-        log.log(Level.INFO, "handling exception : TaskNotFoundException");
+        log.log(Level.INFO, "handling exception : PostNotFoundException");
         models.put("error", exception.getMessage());
         return Response.status(Response.Status.NOT_FOUND).entity("error.xhtml").build();
     }
-    
+
 }

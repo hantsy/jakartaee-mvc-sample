@@ -3,23 +3,33 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <nav id="nav" version="2.0" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav id="nav" version="2.0" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" role="navigation">
         <c:set value="#{request.contextPath}/mvc/tasks" var="tasks" />
         <c:set value="#{request.contextPath}/mvc/tasks/new" var="tasksNew" />
+        {#{request.pathInfo}}
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="${tasks}">Java EE 8 MVC Samples(Facelets)</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="${tasks}">Home</a></li>
-                    <li><a href="${tasksNew}"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true">${null}</span> New Task</a></li>
+            <a class="navbar-brand" href="${tasks}">JakartaEE MVC Sample(Facelets)</a>
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#navbarDemo" 
+                    aria-controls="#navbarDemo" 
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+            <div id="navbarDemo" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="${tasks}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${tasksNew}">
+                            <i class="fa fa-plus-circle">${null}</i>
+                            New Task
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
