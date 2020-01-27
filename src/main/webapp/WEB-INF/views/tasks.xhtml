@@ -41,8 +41,8 @@
                                         <c:set var="markDoingUrl"
                                                value="#{request.contextPath}/mvc/tasks/#{task.id}/status" />
                                         <form action="${markDoingUrl}" method="post">
-                                            <input type="hidden" name="${mvc.csrf.name}"
-                                                   value="${mvc.csrf.token}"/>
+<!--                                            <input type="hidden" name="${mvc.csrf.name}"
+                                                   value="${mvc.csrf.token}"/>-->
                                             <input type="hidden" name="_method" value="PUT"></input>
                                             <input type="hidden" name="status" value="DOING"></input>
                                             <button type="submit" class="btn btn-sm btn-primary">
@@ -80,8 +80,8 @@
                                         <c:set var="markDoneUrl"
                                                value="#{request.contextPath}/mvc/tasks/#{task.id}/status" />
                                         <form action="${markDoneUrl}" method="post">
-                                            <input type="hidden" name="${mvc.csrf.name}"
-                                                   value="${mvc.csrf.token}"/>
+<!--                                            <input type="hidden" name="${mvc.csrf.name}"
+                                                   value="${mvc.csrf.token}"/>-->
                                             <input type="hidden" name="_method" value="PUT"></input>
                                             <input type="hidden" name="status" value="DONE"></input>
                                             <button type="submit" class="btn btn-sm btn-success">

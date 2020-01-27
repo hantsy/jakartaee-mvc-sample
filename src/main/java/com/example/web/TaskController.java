@@ -156,7 +156,7 @@ public class TaskController {
 
     @PUT
     @Path("{id}/status")
-    @CsrfProtected
+    //@CsrfProtected
     public Response updateStatus(@PathParam(value = "id") Long id, @NotNull @FormParam(value = "status") String status) {
         log.log(Level.INFO, "updating status of the existed task@id:{0}, status:{1}", new Object[]{id, status});
 
