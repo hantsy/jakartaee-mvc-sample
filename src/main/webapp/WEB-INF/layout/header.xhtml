@@ -22,9 +22,11 @@
             <div id="navbarDemo" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="${tasks}">Home</a>
+                        <!--<a class="nav-link" href="${tasks}">Home</a>-->
+                        <a class="nav-link" href="#{mvc.basePath}/tasks">Home</a>
                     </li>
                     <li class="nav-item">
+                         <!--<a class="nav-link" href="#{mvc.uri('TaskController#add')}">Home</a>-->
                         <a class="nav-link" href="${tasksNew}">
                             <i class="fa fa-plus-circle">${null}</i>
                             New Task
