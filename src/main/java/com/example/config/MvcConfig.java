@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.web.GreetingController;
 import com.example.web.TaskController;
 
 import java.util.HashSet;
@@ -14,9 +15,29 @@ public class MvcConfig extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes=new HashSet<>();
         classes.add(TaskController.class);
+        classes.add(GreetingController.class);
         classes.add(PrimitiveConverterProvider.class);
         classes.add(PostNotFoundExceptionMapper.class);
         
         return classes;
     }
+    
+    /**
+     * 
+
+    ViewEngine.VIEW_FOLDER
+
+    Csrf.CSRF_PROTECTION
+
+    Csrf.CSRF_HEADER_NAME
+
+
+    
+    @Override
+    public Map<String, Object> getProperties() {
+        final Map<String, Object> map = new HashMap<>();
+        map.put(ViewEngine.VIEW_FOLDER, "/jsp/");
+        return map;
+    }
+     */
 }
