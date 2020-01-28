@@ -303,7 +303,33 @@
                 </dependency>
             </dependencies>
             <build>
-                <plugins>              
+                <plugins> 
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>copy</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>   
+                            </execution>
+                        </executions>                     
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.derby</groupId>
+                                    <artifactId>derby</artifactId>
+                                    <version>10.14.2.0</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+                        </configuration>                                    
+                    </plugin>             
                     <!-- Enable liberty-maven-plugin -->
                     <plugin>
                         <groupId>io.openliberty.tools</groupId>
