@@ -88,7 +88,7 @@ public class TaskController {
     }
 
     @POST
-    //@CsrfProtected
+    @CsrfProtected
     //@ValidateOnExecution(type = ExecutableType.NONE)
     public Response save(@Valid @BeanParam TaskForm form) {
         log.log(Level.INFO, "saving new task @{0}", form);

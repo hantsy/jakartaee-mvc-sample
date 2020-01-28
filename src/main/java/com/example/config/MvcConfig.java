@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import org.eclipse.krazo.forms.HiddenMethodFilter;
 
 @ApplicationPath("mvc")
 public class MvcConfig extends Application {
@@ -20,6 +21,7 @@ public class MvcConfig extends Application {
         classes.add(LocaleController.class);
         classes.add(PrimitiveConverterProvider.class);
         classes.add(PostNotFoundExceptionMapper.class);
+       // classes.add(HiddenMethodFilter.class);
 
         return classes;
     }
