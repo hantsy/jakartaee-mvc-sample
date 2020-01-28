@@ -8,9 +8,12 @@
     <ui:define name="content">
         <div class="row">
             <div class="col-md-12">
-                <dl>
+                <dl class="dl-horizontal">
                     <dt>Locale</dt>
                     <dd>${locale}</dd>
+                    
+                    <dt>Message</dt>
+                    <dd>#{msg.get('greeting')}</dd>
                 </dl>
             </div>
         </div>
