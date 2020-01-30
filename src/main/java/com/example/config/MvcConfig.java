@@ -21,7 +21,7 @@ public class MvcConfig extends Application {
         classes.add(LocaleController.class);
         classes.add(PrimitiveConverterProvider.class);
         classes.add(PostNotFoundExceptionMapper.class);
-       // classes.add(HiddenMethodFilter.class);
+        classes.add(HiddenMethodFilter.class);
 
         return classes;
     }

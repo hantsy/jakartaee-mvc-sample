@@ -10,7 +10,8 @@
             <div class="col-md-12">
                 <c:set var="formActionUrl" value="#{request.contextPath}/mvc/tasks/#{task.id}"/>
                 <form id="form" name="form" role="form" class="form" action="${formActionUrl}" method="post">                    
-
+                    <input type="hidden" name="${mvc.csrf.name}"
+                           value="${mvc.csrf.token}"/>
                     <input type="hidden" name="_method" value="PUT"/>
                     <div
                         class="form-group">
@@ -24,7 +25,6 @@
                         <label class="control-label" for="description">Task Description:</label>
                         <textarea id="description" name="description" class="form-control" rows="8">${task.description}</textarea>
                         <div class="help-block">
-
                         </div>
                     </div>
 

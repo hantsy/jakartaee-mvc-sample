@@ -128,6 +128,7 @@ public class TaskController {
 
     @PUT
     @Path("{id}")
+    @CsrfProtected
     public Response update(@PathParam(value = "id") Long id, @Valid @BeanParam TaskForm form) {
         log.log(Level.INFO, "updating existed task@id:{0}, form data:{1}", new Object[]{id, form});
 
