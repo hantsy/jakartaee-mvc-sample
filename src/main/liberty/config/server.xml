@@ -37,8 +37,8 @@
 	</library>
 
 	<!-- Datasource Configuration -->
-	<dataSource id="DefaultDataSource"
-			  jndiName="java:comp/DefaultDataSource">
+    <!-- remove jndiName="" to serve java:comp/DefaultDataSource for Java EE 7 or above -->
+	<dataSource id="DefaultDataSource">
 	  <jdbcDriver libraryRef="derbyJDBCLib" />
 	  <properties.derby.embedded databaseName="taskdb" createDatabase="create"/>
 	</dataSource>

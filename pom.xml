@@ -17,6 +17,9 @@
 
         <!-- Jakarta EE API -->
         <jakartaee-api.version>8.0.0</jakartaee-api.version>
+        
+        <!-- Eclipse Krazo -->
+        <krazo.version>1.0.0</krazo.version>
 
         <!-- Maven Plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -29,8 +32,6 @@
         <!-- Arquillian BOM -->
         <arquillian-bom.version>1.5.0.Final</arquillian-bom.version>
         
-        <krazo.version>1.0.0</krazo.version>
-
         <!-- Glassfish server -->
         <glassfish.version>5.1.0</glassfish.version>
         <arquillian-glassfish.version>1.0.2</arquillian-glassfish.version>
@@ -43,11 +44,18 @@
 
         <!-- Wildfly server-->
         <wildfly.version>19.0.0.Beta1</wildfly.version>
+        <wildfly-maven-plugin.version>2.1.0.Beta1</wildfly-maven-plugin.version>
         <wildfly-arquillian.version>2.2.0.Final</wildfly-arquillian.version>
         <!--  websockets-jsr and resteasy for client, aligned with Wildfly version. -->
         <undertow-websockets-jsr.version>2.0.26.Final</undertow-websockets-jsr.version>
         <resteasy.version>3.9.0.Final</resteasy.version>
-
+        
+        <!-- OpenLiberty server -->
+        <liberty.runtime.version>20.0.0.1</liberty.runtime.version>     
+        <!-- WARNING: 10.15.x.x does not work with openliberty 20.0.0.1 -->
+        <derby.version>10.14.2.0</derby.version>
+        <liberty-maven-plugin.version>3.1</liberty-maven-plugin.version>
+        
         <!-- By default, skip tests -->
         <skipTests>true</skipTests>
     </properties>
@@ -289,7 +297,7 @@
                     <plugin>
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
-                        <version>2.1.0.Beta1</version>
+                        <version>${wildfly-maven-plugin.version}</version>
                     </plugin>
                 </plugins>
             </build>
@@ -307,7 +315,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>3.1.1</version>
+                        <version>${maven-dependency-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>copy</id>
@@ -322,7 +330,7 @@
                                 <artifactItem>
                                     <groupId>org.apache.derby</groupId>
                                     <artifactId>derby</artifactId>
-                                    <version>10.14.2.0</version>
+                                    <version>${derby.version}</version>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
                                 </artifactItem>
@@ -334,10 +342,7 @@
                     <plugin>
                         <groupId>io.openliberty.tools</groupId>
                         <artifactId>liberty-maven-plugin</artifactId>
-                        <version>3.1</version>
-                        <configuration>
-                            <libertyRuntimeVersion>20.0.0.1</libertyRuntimeVersion>
-                        </configuration>
+                        <version>${liberty-maven-plugin.version}</version>
                     </plugin>
                 </plugins>
             </build>
