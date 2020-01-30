@@ -4,11 +4,11 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/WEB-INF/layout/template.xhtml">
-    <ui:define name="pageTitle"> EDIT TASK #${task.id}</ui:define>
+    <ui:define name="pageTitle"> EDIT TASK #${taskId}</ui:define>
     <ui:define name="content">
         <div class="row" >
             <div class="col-md-12">
-                <c:set var="formActionUrl" value="#{request.contextPath}/mvc/tasks/#{task.id}"/>
+                <c:set var="formActionUrl" value="#{request.contextPath}/mvc/tasks/#{taskId}"/>
                 <form id="form" name="form" role="form" class="form" action="${formActionUrl}" method="post">                    
                     <input type="hidden" name="${mvc.csrf.name}"
                            value="${mvc.csrf.token}"/>

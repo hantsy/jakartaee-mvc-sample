@@ -83,7 +83,8 @@ public class TaskController {
     @Path("new")
     public Viewable add() {
         log.log(Level.INFO, "add new task");
-
+        TaskForm form = new TaskForm();
+        models.put("task", form);
         return new Viewable("add.xhtml");
     }
 
@@ -101,6 +102,7 @@ public class TaskController {
                         alert.addError(t.getParamName(), "", t.getMessage());
                     });
             models.put("errors", alert);
+            models.put("task", form);
             return Response.status(BAD_REQUEST).entity("add.xhtml").build();
         }
 
@@ -123,6 +125,7 @@ public class TaskController {
         Task task = taskRepository.findById(id);
 
         models.put("task", task);
+        models.put("taskId", id);
         return new Viewable("edit.xhtml");
     }
 
@@ -140,6 +143,8 @@ public class TaskController {
                         alert.addError(t.getParamName(), "", t.getMessage());
                     });
             models.put("errors", alert);
+            models.put("taskId", id);
+            models.put("task", form);
             return Response.status(BAD_REQUEST).entity("edit.xhtml").build();
         }
 
