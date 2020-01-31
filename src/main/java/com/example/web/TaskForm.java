@@ -13,6 +13,9 @@ public class TaskForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @FormParam("id")
+    private Long id;
+
     @NotBlank
     @FormParam("name")
     @MvcBinding
@@ -23,6 +26,14 @@ public class TaskForm implements Serializable {
     @FormParam("description")
     @MvcBinding
     private String description;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -43,8 +54,9 @@ public class TaskForm implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.name);
-        hash = 23 * hash + Objects.hashCode(this.description);
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.name);
+        hash = 61 * hash + Objects.hashCode(this.description);
         return hash;
     }
 
@@ -66,12 +78,15 @@ public class TaskForm implements Serializable {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "TaskForm{" + "name=" + name + ", description=" + description + '}';
+        return "TaskForm{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
-
+  
 }

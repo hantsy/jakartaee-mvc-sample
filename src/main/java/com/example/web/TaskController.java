@@ -124,8 +124,11 @@ public class TaskController {
 
         Task task = taskRepository.findById(id);
 
-        models.put("task", task);
-        models.put("taskId", id);
+        TaskForm form = new TaskForm();
+        form.setId(task.getId());
+        form.setName(task.getName());
+        form.setDescription(task.getDescription());
+        models.put("task", form);
         return new Viewable("edit.xhtml");
     }
 
@@ -143,7 +146,6 @@ public class TaskController {
                         alert.addError(t.getParamName(), "", t.getMessage());
                     });
             models.put("errors", alert);
-            models.put("taskId", id);
             models.put("task", form);
             return Response.status(BAD_REQUEST).entity("edit.xhtml").build();
         }

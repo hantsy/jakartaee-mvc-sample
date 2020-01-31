@@ -43,7 +43,7 @@ public class GreetingController {
     }
 
     @POST
-   // @CsrfProtected
+    @CsrfProtected
     @UriRef("greeting-post")
     public String post(
             @FormParam("greeting")
