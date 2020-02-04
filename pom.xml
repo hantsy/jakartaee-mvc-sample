@@ -613,10 +613,10 @@
                             <environmentVariables>
                                 <GLASSFISH_HOME>${project.build.directory}/payara5</GLASSFISH_HOME>
                             </environmentVariables>
-                            <!-- This needs tuning -->
+                            <!-- This needs tuning 
                             <systemPropertyVariables>
                                 <arquillian.launch>glassfish</arquillian.launch>
-                            </systemPropertyVariables>
+                            </systemPropertyVariables>-->
                         </configuration>
                     </plugin>
                 </plugins>
@@ -641,12 +641,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>${maven-failsafe-plugin.version}</version>
-                        <configuration>
-                            <!-- This needs tuning -->
-                            <systemPropertyVariables>
-                                <arquillian.launch>glassfish</arquillian.launch>
-                            </systemPropertyVariables>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
