@@ -25,10 +25,7 @@ jobs:
     
     - name: Run integration test with -Parq-payara-managed
       run: mvn clean verify -Parq-payara-managed,jersey        
-
-    - name: Run integration test with -Parq-payara-embedded(chromeheadless)
-      run: mvn clean verify -Parq-payara-embedded,jersey,chromeheadless
-
+      
     - name: Run integration test with -Parq-payara-embedded
       run: mvn clean verify -Parq-payara-embedded,jersey
       
