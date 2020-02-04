@@ -79,10 +79,10 @@
             </dependency>
             
             <!-- Selenium bom is optional -->
-           <dependency>                                      
+            <dependency>                                      
                 <groupId>org.jboss.arquillian.selenium</groupId>
                 <artifactId>selenium-bom</artifactId>
-                 <version>3.13.0</version>
+                <version>3.13.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -195,6 +195,13 @@
             <scope>test</scope>
             <type>pom</type>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.graphene</groupId>
@@ -250,14 +257,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <skipTests>${skipTests}</skipTests>
-                </configuration>
-            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -562,12 +561,12 @@
             <dependencies>
 
                 <!-- https://mvnrepository.com/artifact/fish.payara.arquillian/payara-client-ee8 -->
-                <!--<dependency>
+                <dependency>
                     <groupId>fish.payara.arquillian</groupId>
                     <artifactId>payara-client-ee8</artifactId>
                     <version>${arquillian-payara-server.version}</version>
                     <scope>test</scope>
-                </dependency>-->
+                </dependency>
 
                 <!-- Payara Server Container adaptor  -->
                 <dependency>
