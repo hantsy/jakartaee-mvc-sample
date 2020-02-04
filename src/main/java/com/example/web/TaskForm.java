@@ -2,13 +2,11 @@ package com.example.web;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.enterprise.context.RequestScoped;
 import javax.mvc.binding.MvcBinding;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 
-@RequestScoped
 public class TaskForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
