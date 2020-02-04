@@ -20,10 +20,10 @@ import javax.ws.rs.Path;
  *
  * @author hantsy
  */
-@Path("greeting")
+@Path("csrf")
 @Controller
 @RequestScoped
-public class GreetingController {
+public class CsrfController {
 
     @Inject
     BindingResult bindingResult;
@@ -39,11 +39,11 @@ public class GreetingController {
 
     @GET
     public String get() {
-        return "greeting.xhtml";
+        return "csrf.xhtml";
     }
 
     @POST
-    @UriRef("greeting-post")
+    @CsrfProtected
     public String post(
             @FormParam("greeting")
             @MvcBinding
@@ -57,12 +57,12 @@ public class GreetingController {
                     });
             models.put("errors", alert);
             log.info("mvc binding failed.");
-            return "greeting.xhtml";
+            return "csrf.xhtml";
         }
 
         log.info("redirect to greeting page.");
         flashMessage.notify(AlertMessage.Type.success, "Message:" + greeting);
-        return "redirect:greeting";
+        return "redirect:csrf";
     }
 
 }
