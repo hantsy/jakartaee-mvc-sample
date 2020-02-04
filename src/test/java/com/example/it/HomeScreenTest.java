@@ -6,6 +6,8 @@ import com.example.domain.Task;
 import com.example.web.TaskController;
 import java.io.File;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -29,6 +31,7 @@ import org.openqa.selenium.WebDriver;
  */
 @RunWith(Arquillian.class)
 public class HomeScreenTest {
+    private static final Logger LOGGER = Logger.getLogger(HomeScreenTest.class.getName());
 
     private static final String WEBAPP_SRC = "src/main/webapp";
 
@@ -57,7 +60,7 @@ public class HomeScreenTest {
                         "/", Filters.include(".*\\.(xhtml|css|xml)$")
                 );
 
-        System.out.println("deployment unit:" + war.toString(true));
+       LOGGER.log(Level.INFO, "deployment unit:{0}", war.toString(true));
         return war;
     }
 
@@ -73,7 +76,9 @@ public class HomeScreenTest {
     @Test
     @RunAsClient
     public void testHomePage() {
-        browser.get(deploymentUrl.toExternalForm()+"/mvc/tasks");
+        final String url = deploymentUrl.toExternalForm();
+        LOGGER.log(Level.INFO, "deploymentUrl{0}", url);       
+        browser.get(url+"/mvc/tasks");
         home.assertTodoTasksSize(2);
     }
 }

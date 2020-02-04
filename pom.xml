@@ -322,6 +322,12 @@
             </properties>
         </profile>
         <profile>
+            <id>chromeheadless</id>
+            <properties>
+                <browser>chromeheadless</browser>
+            </properties>
+        </profile>
+        <profile>
             <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
