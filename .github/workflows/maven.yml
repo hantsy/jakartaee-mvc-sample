@@ -24,8 +24,8 @@ jobs:
       run: mvn clean package --file pom.xml
     
     - name: Run integration test with -Parq-payara-managed
-      run: mvn clean verify -Parq-payara-managed,jersey -e      
+      run: mvn clean verify -Parq-payara-managed,jersey -X      
 
     - name: Run integration test with -Parq-payara-embedded
-      run: mvn clean verify -Parq-payara-embedded,jersey -e
+      run: mvn clean verify -Parq-payara-embedded,jersey -X
       
