@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -31,18 +32,21 @@ import org.openqa.selenium.WebDriver;
  */
 @RunWith(Arquillian.class)
 public class HomeScreenTest {
+
     private static final Logger LOGGER = Logger.getLogger(HomeScreenTest.class.getName());
 
     private static final String WEBAPP_SRC = "src/main/webapp";
 
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
-         File[] extraJars = Maven.resolver().loadPomFromFile("pom.xml")
-            .resolve(
-                "org.eclipse.krazo:krazo-jersey:1.0.0"
-            )
-            .withTransitivity()
-            .asFile();
+        File[] extraJars = Maven.resolver().loadPomFromFile("pom.xml")
+                .resolve(
+                        "org.eclipse.krazo:krazo-jersey:1.0.0",
+                        "org.eclipse.krazo:krazo-core:1.0.0",
+                        "jakarta.mvc.javax.mvc-api:1.0.0"
+                )
+                .withTransitivity()
+                .asFile();
         WebArchive war = ShrinkWrap.create(WebArchive.class)
                 .addAsLibraries(extraJars)
                 .addPackage(Bootstrap.class.getPackage())
@@ -60,25 +64,18 @@ public class HomeScreenTest {
                         "/", Filters.include(".*\\.(xhtml|css|xml)$")
                 );
 
-       LOGGER.log(Level.INFO, "deployment unit:{0}", war.toString(true));
+        LOGGER.log(Level.INFO, "deployment unit:{0}", war.toString(true));
         return war;
     }
-
-    @Drone
-    private WebDriver browser;
 
     @ArquillianResource
     private URL deploymentUrl;
 
-    @Page
-    HomePage home;
-
     @Test
     @RunAsClient
-    public void testHomePage() {
+    public void testHomePage(@InitialPage HomePage home) {
         final String url = deploymentUrl.toExternalForm();
-        LOGGER.log(Level.INFO, "deploymentUrl{0}", url);       
-        browser.get(url+"/mvc/tasks");
+        LOGGER.log(Level.INFO, "deploymentUrl{0}", url);
         home.assertTodoTasksSize(2);
     }
 }
