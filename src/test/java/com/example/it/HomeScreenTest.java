@@ -40,12 +40,13 @@ public class HomeScreenTest {
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
         File[] extraJars = Maven.resolver().loadPomFromFile("pom.xml")
-                .resolve(
-                        "org.eclipse.krazo:krazo-jersey:1.0.0",
-                        "org.eclipse.krazo:krazo-core:1.0.0",
-                        "jakarta.mvc.javax.mvc-api:1.0.0"
-                )
-                .withTransitivity()
+                //                .resolve(
+                //                        "org.eclipse.krazo:krazo-jersey:1.0.0",
+                //                        "org.eclipse.krazo:krazo-core:1.0.0",
+                //                        "jakarta.mvc.javax.mvc-api:1.0.0"
+                //                )
+                //                .withTransitivity()
+                .importRuntimeDependencies().resolve().withTransitivity()
                 .asFile();
         WebArchive war = ShrinkWrap.create(WebArchive.class)
                 .addAsLibraries(extraJars)
@@ -56,6 +57,8 @@ public class HomeScreenTest {
                 //Add JPA persistence configuration.
                 //WARN: In a war archive, persistence.xml should be put into /WEB-INF/classes/META-INF/, not /META-INF
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsResource("messages.properties")
+                .addAsResource("messages_zh_CN.properties")
                 // Enable CDI
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 // add template resources.

@@ -105,6 +105,11 @@
             <!-- https://mvnrepository.com/artifact/org.eclipse.krazo/krazo-jersey -->
             <dependency>
                 <groupId>org.eclipse.krazo</groupId>
+                <artifactId>krazo-core</artifactId>
+                <version>${krazo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.krazo</groupId>
                 <artifactId>krazo-jersey</artifactId>
                 <version>${krazo.version}</version>
             </dependency>
@@ -175,8 +180,11 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
+        </dependency>              
+        <dependency>
+            <groupId>org.eclipse.krazo</groupId>
+            <artifactId>krazo-core</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
@@ -326,18 +334,6 @@
             <properties>
                 <browser>chromeheadless</browser>
             </properties>
-        </profile>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.eclipse.krazo</groupId>
-                    <artifactId>krazo-jersey</artifactId>
-                </dependency>
-            </dependencies>
         </profile>
         <profile>
             <id>jersey</id>
