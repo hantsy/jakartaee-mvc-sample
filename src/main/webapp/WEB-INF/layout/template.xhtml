@@ -42,11 +42,11 @@
             <main role="main" class="flex-shrink-0">
                 <h:panelGroup layout="block" styleClass="container">
                     <ui:include src="/WEB-INF/layout/alert.xhtml"/>
-                    <h:panelGroup layout="block" styleClass="mt-5">
-                        <h1>
-                            <ui:insert name="pageTitle"></ui:insert>
-                        </h1>
-                    </h:panelGroup>
+
+                    <h1 class="page-header display-3">
+                        <ui:insert name="pageTitle"></ui:insert>
+                    </h1>
+
                     <ui:insert name="content"/>
                 </h:panelGroup>              
             </main>

@@ -31,6 +31,9 @@
 
         <!-- Arquillian BOM -->
         <arquillian-bom.version>1.5.0.Final</arquillian-bom.version>
+        <version.org.jboss.arquillian.drone>2.4.5</version.org.jboss.arquillian.drone>
+        <version.org.jboss.arquillian.graphene>2.3.2</version.org.jboss.arquillian.graphene>
+        <htmlunit.version>2.38.0</htmlunit.version>
         
         <!-- Glassfish server -->
         <glassfish.version>5.1.0</glassfish.version>
@@ -40,7 +43,7 @@
 
         <!-- Payara server -->
         <payara.version>5.194</payara.version>
-        <arquillian-payara-server.version>2.0</arquillian-payara-server.version>
+        <arquillian-payara-server.version>2.2</arquillian-payara-server.version>
 
         <!-- Wildfly server-->
         <wildfly.version>19.0.0.Beta1</wildfly.version>
@@ -60,7 +63,7 @@
         <skipTests>true</skipTests>
         
         <!-- PhantomJS will be our default browser if no profile is specified-->
-        <browser>phantomjs</browser> 
+        <browser>phantomjs</browser>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -77,22 +80,49 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            
+
             <!-- Selenium bom is optional -->
-            <dependency>                                      
+            <!-- Selenium BOM -->
+            <dependency>
                 <groupId>org.jboss.arquillian.selenium</groupId>
                 <artifactId>selenium-bom</artifactId>
-                <version>3.13.0</version>
+                <version>3.8.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- Arquillian Drone dependencies and WebDriver/Selenium dependencies -->
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-bom</artifactId>
-                <version>2.4.3</version>
+                <version>${version.org.jboss.arquillian.drone}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- To use Arquillian Graphene 2-->
+            <dependency>
+                <groupId>org.jboss.arquillian.graphene</groupId>
+                <artifactId>graphene-webdriver</artifactId>
+                <version>${version.org.jboss.arquillian.graphene}</version>
+                <type>pom</type>
+                <scope>test</scope>
+            </dependency>
+            <!-- To use WebDriver -->
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-webdriver-depchain</artifactId>
+                <version>${version.org.jboss.arquillian.drone}</version>
+                <type>pom</type>
+                <scope>test</scope>
+            </dependency>
+            
+            <!-- HtmlUnit -->
+            <dependency>
+                <groupId>net.sourceforge.htmlunit</groupId>
+                <artifactId>htmlunit</artifactId>
+                <version>${htmlunit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
 
             <!-- NOTE: MVC is NOT part of the final Java EE/JatartaEE 8, add them into dependencies explicitly. -->
             <!-- https://mvnrepository.com/artifact/javax.mvc/javax.mvc-api -->
@@ -214,38 +244,19 @@
         <dependency>
             <groupId>org.jboss.arquillian.graphene</groupId>
             <artifactId>graphene-webdriver</artifactId>
-            <version>2.3.2</version>
             <type>pom</type>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.awaitility</groupId>
-            <artifactId>awaitility</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.skyscreamer</groupId>
-            <artifactId>jsonassert</artifactId>
-        </dependency>
-        <!--        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path-assert</artifactId>
-        </dependency>     -->
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

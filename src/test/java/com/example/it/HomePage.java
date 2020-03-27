@@ -5,7 +5,7 @@
  */
 package com.example.it;
 
-import org.jboss.arquillian.graphene.page.Location;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,7 +15,6 @@ import org.openqa.selenium.support.FindBy;
  *
  * @author hantsy
  */
-@Location("mvc/tasks")
 public class HomePage {
 
     @FindBy(id = "todotasks")
@@ -26,6 +25,13 @@ public class HomePage {
 
     @FindBy(id = "donetasks")
     private WebElement donetasks;
+
+    @FindBy(css = "h1.page-header")
+    private WebElement title;
+
+    public void assertOnHomePage() {
+        assertEquals("TASK LIST", title.getText());
+    }
 
     public void assertTodoTasksSize(int size) {
         assertTrue(todotasks.findElements(By.cssSelector("li.list-group-item")).size() == size);
@@ -38,7 +44,5 @@ public class HomePage {
     public void assertDoneTasksSize(int size) {
         assertTrue(donetasks.findElements(By.cssSelector("li.list-group-item")).size() == size);
     }
-    
-    
-    
+
 }

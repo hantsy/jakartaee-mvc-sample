@@ -4,18 +4,21 @@ import com.example.Bootstrap;
 import com.example.config.MvcConfig;
 import com.example.domain.Task;
 import com.example.web.TaskController;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.drone.api.annotation.Drone;
-import org.jboss.arquillian.graphene.page.InitialPage;
-import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.Filters;
@@ -27,20 +30,18 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
 import org.jboss.shrinkwrap.resolver.api.maven.coordinate.MavenDependencies;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * @author hantsy
  */
 @RunWith(Arquillian.class)
-public class HomeScreenTest {
+public class HomeScreenHtmlUnitTest {
 
-    private static final Logger LOGGER = Logger.getLogger(HomeScreenTest.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HomeScreenHtmlUnitTest.class.getName());
 
     private static final String WEBAPP_SRC = "src/main/webapp";
 
@@ -74,7 +75,7 @@ public class HomeScreenTest {
                 // add template resources.
                 .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
                         .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
-                        "/", Filters.include(".*\\.(html|xhtml|css|xml)$")
+                        "/", Filters.include(".*\\.(xhtml|css|xml)$")
                 );
 
         LOGGER.log(Level.INFO, "deployment unit:{0}", war.toString(true));
@@ -84,16 +85,43 @@ public class HomeScreenTest {
     @ArquillianResource
     private URL deploymentUrl;
 
-    @Drone
-    private WebDriver browser;
+    private WebClient webClient;
 
-    @Page
-    HomePage homePage;
+    @Before
+    public void setUp() {
+        webClient = new WebClient();
+        webClient.getOptions()
+                .setThrowExceptionOnFailingStatusCode(false);
+        webClient.getOptions()
+                .setRedirectEnabled(true);
+    }
 
     @Test
-    public void testHomePage(@InitialPage IndexPage idxPage) {
-        idxPage.clickStartButton();
-        homePage.assertOnHomePage();
-        homePage.assertTodoTasksSize(2);
+    public void testHomePageElements() throws IOException {
+        final String url = deploymentUrl.toExternalForm();
+        LOGGER.log(Level.INFO, "deploymentUrl: {0}", url);
+        final HtmlPage page = webClient.getPage(url + "mvc/tasks");
+
+        DomElement todoTasksNode = page.getElementById("todotasks");
+        List<HtmlElement> taskList = todoTasksNode.getElementsByTagName("li");
+        assertTrue(taskList.size() == 2);
+
+        if (!taskList.isEmpty()) {
+            HtmlElement firstTasNode = taskList.get(0);
+
+            List<HtmlElement> buttonNodes = firstTasNode.getElementsByTagName("button");
+            assertTrue(buttonNodes.size() == 1);
+
+            HtmlButton startButton = (HtmlButton) buttonNodes.get(0);
+            WebResponse res = startButton.click().getWebResponse();
+
+            if (res.getStatusCode() == 200) {
+                final HtmlPage page2 = webClient.getPage(url + "mvc/tasks");
+                assertTrue(page2.getElementById("todotasks").getElementsByTagName("li").size() == 1);
+                assertTrue(page2.getElementById("doingtasks").getElementsByTagName("li").size() == 1);
+            }
+        }
+
     }
+
 }
