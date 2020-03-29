@@ -10,13 +10,9 @@ In this sample application, we will build a web application with [Jakarta MVC sp
 * Resteasy( Wildfly)
 * Apache CXF( TomEE)
 
+## Docs
 
-
-
-
-
-
-
+* [Building a web application with Jakarta MVC and Eclipse Krazo](./docs/guide.md)
 
 ## Reference 
 

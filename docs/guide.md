@@ -593,7 +593,7 @@ There are a few issues I encountered when writing this sample application. Espec
 
 * I have prepared a simple tests with Arquillian Drone and Arquillian Graphene, but it is failed on  Payara embedded container(I only tests on Payara Managed and Payara Embedded).
 
-* The `MvcBinding` and form validation did not work on CXF/Open Liberty.
+* The `MvcBinding` and form validation do not work on CXF/Open Liberty.
 
    
 
