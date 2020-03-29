@@ -7,15 +7,7 @@ import javax.inject.Inject;
 import javax.mvc.Controller;
 import javax.mvc.Models;
 import javax.mvc.MvcContext;
-import javax.mvc.UriRef;
-import javax.mvc.binding.BindingResult;
-import javax.mvc.binding.MvcBinding;
-import javax.mvc.binding.ParamError;
-import javax.mvc.security.CsrfProtected;
-import javax.validation.constraints.NotBlank;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**

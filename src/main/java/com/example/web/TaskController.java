@@ -13,13 +13,10 @@ import javax.mvc.Controller;
 import javax.mvc.Models;
 import javax.mvc.View;
 import javax.mvc.binding.BindingResult;
-import javax.mvc.binding.MvcBinding;
 import javax.mvc.binding.ParamError;
 import javax.mvc.security.CsrfProtected;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.executable.ExecutableType;
-import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -81,11 +78,11 @@ public class TaskController {
 
     @GET
     @Path("new")
-    public Viewable add() {
+    public String add() {
         log.log(Level.INFO, "add new task");
         TaskForm form = new TaskForm();
         models.put("task", form);
-        return new Viewable("add.xhtml");
+        return "add.xhtml";
     }
 
     @POST
