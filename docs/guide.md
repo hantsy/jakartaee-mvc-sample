@@ -589,9 +589,9 @@ When running the application, and access http://localhost:8080/jakarta-mvc-sampl
 
 There are a few issues I encountered when writing this sample application. Especially, there are some blocking issues when using Apache CXF and Open Liberty. 
 
-* I have prepared a simple test with Arquillian Drone and Arquillian Graphene, but it is [failed on  Payara embedded container](https://github.com/hantsy/jakartaee-mvc-sample/runs/543392046)(I only tests on Payara Managed and Payara Embedded).
-
-* The `MvcBinding` and form validation do not work on CXF/Open Liberty.
+* I have prepared a simple test with Arquillian Drone and Arquillian Graphene, but it is [failed on  Payara embedded container](https://github.com/hantsy/jakartaee-mvc-sample/runs/543392046)(I only ran tests on Payara Managed and Payara Embedded).
+* The `MvcBinding` and form validation do not work on CXF/Open Liberty, see issue [eclipse-ee4j/krazo#144](https://github.com/eclipse-ee4j/krazo/issues/144).
+* If  overriding `getClasses` in the `Application`, the application will fail to start up on Open Liberty, see issue [eclipse-ee4j/krazo#157](https://github.com/eclipse-ee4j/krazo/issues/157) and  [eclipse-ee4j/krazo#147](https://github.com/eclipse-ee4j/krazo/issues/147).
 
 Compared to JSF, MVC is a new and young spec. I think it will be accepted by developers and become mature as time goes by. 
 
