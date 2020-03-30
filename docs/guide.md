@@ -14,7 +14,7 @@ In this post, we will reuse the work of  [Jakarta EE 8 starter](https://github.c
 
 ## Configuring MVC
 
-Add the following dependencies.
+MVC is not part of Jakarta EE 8,  add the following dependencies.
 
 ```xml
 <dependency>
@@ -244,9 +244,9 @@ public class TaskController {
 
 The `@Controller` can be placed on the classes or methods, if it is on the classes, all methods can be used to handling requests from/for views.
 
-The `Models` is a helper bean to organize the models that be put into the view, which is very similar with `ModelMap` in Spring MVC. Any CDI compatible scoped beans can be used as models in MVC.
+The `Models` is a helper bean to organize the models that be put into the view, which is very similar with `ModelMap` in Spring MVC. Any CDI compatible beans can be used as models in MVC.
 
-Like Spring MVC, Eclipse Krazo also provides a [HiddenMethodFilter](https://github.com/eclipse-ee4j/krazo/blob/master/core/src/main/java/org/eclipse/krazo/forms/HiddenMethodFilter.java) to delegate form post handling to `PUT`, `PATCHP`, `DELETE` methods in the controller. Just need to add a hidden field `_method` in the form in the view.
+Like Spring MVC, Eclipse Krazo also provides a [HiddenMethodFilter](https://github.com/eclipse-ee4j/krazo/blob/master/core/src/main/java/org/eclipse/krazo/forms/HiddenMethodFilter.java) to delegate form post handling to `PUT`, `PATCHP`, `DELETE` methods in the controller. Just need to add a hidden field named `_method` in the form in the view.
 
 The `AlertMessage` is a `RedirectScope` bean, similar with `Flash` scoped models in other framework which can be alive in the `Post-Redirect-Get` lifecycle. It is very useful to send feedback messages to client.
 
@@ -587,17 +587,15 @@ public class LocaleController {
 
 When running the application, and access http://localhost:8080/jakarta-mvc-sample/mvc/locale?lang=en and http://localhost:8080/jakarta-mvc-sample/mvc/locale?lang=zh-CN to see the messages changed in the *locale.xhtml* view.
 
-Compared to JSF, MVC is a new and young spec. I think it will be accepted by developers and become mature as time goes by.
-
 There are a few issues I encountered when writing this sample application. Especially, there are some blocking issues when using Apache CXF and Open Liberty. 
 
-* I have prepared a simple tests with Arquillian Drone and Arquillian Graphene, but it is failed on  Payara embedded container(I only tests on Payara Managed and Payara Embedded).
+* I have prepared a simple test with Arquillian Drone and Arquillian Graphene, but it is [failed on  Payara embedded container](https://github.com/hantsy/jakartaee-mvc-sample/runs/543392046)(I only tests on Payara Managed and Payara Embedded).
 
 * The `MvcBinding` and form validation do not work on CXF/Open Liberty.
 
-   
+Compared to JSF, MVC is a new and young spec. I think it will be accepted by developers and become mature as time goes by. 
 
-
+Grab the complete [source codes](https://github.com/hantsy/jakartaee-mvc-sample) from my Github.
 
 
 
