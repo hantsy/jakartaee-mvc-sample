@@ -593,8 +593,6 @@ There are a few issues I encountered when writing this sample application. Espec
 * The `MvcBinding` and form validation do not work on CXF/Open Liberty, see issue [eclipse-ee4j/krazo#144](https://github.com/eclipse-ee4j/krazo/issues/144).
 * If  overriding `getClasses` in the `Application`, the application will fail to start up on Open Liberty, see issue [eclipse-ee4j/krazo#157](https://github.com/eclipse-ee4j/krazo/issues/157) and  [eclipse-ee4j/krazo#147](https://github.com/eclipse-ee4j/krazo/issues/147).
 
-Compared to JSF, MVC is a new and young spec. I think it will be accepted by developers and become mature as time goes by. 
-
 Grab the complete [source codes](https://github.com/hantsy/jakartaee-mvc-sample) from my Github.
 
 
