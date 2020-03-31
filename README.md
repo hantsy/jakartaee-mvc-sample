@@ -10,9 +10,30 @@ In this sample application, we will build a web application with [Jakarta MVC sp
 * Resteasy( Wildfly)
 * Apache CXF( TomEE)
 
+![home](./home.png)
+
 ## Docs
 
 * [Building a web application with Jakarta MVC and Eclipse Krazo](./docs/guide.md)
+
+
+
+## Build
+
+1. Clone a copy of the source codes.
+
+   ```bash
+   git clone https://github.com/hantsy/jakartaee-mvc-sample
+   ```
+
+2. Run on Glassfish, Wildfly or Open Liberty.
+
+   ```bash
+   mvn clean package cargo:run -pglassfish-local
+   mvn clean wildfly:run -Pwildfly
+   mvn clean liberty:create dependency:copy liberty:run -Popenliberty
+   ```
+   
 
 ## Reference 
 
