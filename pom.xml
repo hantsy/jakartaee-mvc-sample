@@ -129,7 +129,7 @@
             <dependency>
                 <groupId>javax.mvc</groupId>
                 <artifactId>javax.mvc-api</artifactId>
-                <version>1.0.0</version>
+                <version>1.0-pr</version>
                 <!--<scope>provided</scope>-->
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.eclipse.krazo/krazo-jersey -->
