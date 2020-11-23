@@ -1,4 +1,4 @@
-name: Java CI
+name: build
 
 on: 
   push:
@@ -26,6 +26,6 @@ jobs:
     - name: Run integration test with -Parq-payara-managed
       run: mvn clean verify -Parq-payara-managed,jersey -X      
 
-    - name: Run integration test with -Parq-payara-embedded
-      run: mvn clean verify -Parq-payara-embedded,jersey -X
+    # - name: Run integration test with -Parq-payara-embedded
+    #   run: mvn clean verify -Parq-payara-embedded,jersey -X
       
