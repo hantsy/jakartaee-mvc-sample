@@ -126,12 +126,13 @@
 
             <!-- NOTE: MVC is NOT part of the final Java EE/JatartaEE 8, add them into dependencies explicitly. -->
             <!-- https://mvnrepository.com/artifact/javax.mvc/javax.mvc-api -->
+
+            <!-- https://mvnrepository.com/artifact/jakarta.mvc/jakarta.mvc-api -->
             <dependency>
-                <groupId>javax.mvc</groupId>
-                <artifactId>javax.mvc-api</artifactId>
-                <version>1.0.0</version>
-                <!--<scope>provided</scope>-->
-            </dependency>
+               <groupId>jakarta.mvc</groupId>
+                <artifactId>jakarta.mvc-api</artifactId>
+                <version>1.1.0</version>
+             </dependency>
             <!-- https://mvnrepository.com/artifact/org.eclipse.krazo/krazo-jersey -->
             <dependency>
                 <groupId>org.eclipse.krazo</groupId>
