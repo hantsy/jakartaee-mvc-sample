@@ -16,15 +16,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
       with:
-        java-version: 1.8
+        java-version: 8
+        distribution: 'adopt'
     - name: Build with Maven
       run: mvn clean package --file pom.xml
     
     - name: Run integration test with -Parq-payara-managed
-      run: mvn clean verify -Parq-payara-managed,jersey -X      
+      run: mvn -B -q clean verify -Parq-payara-managed,jersey   
 
     # - name: Run integration test with -Parq-payara-embedded
     #   run: mvn clean verify -Parq-payara-embedded,jersey -X
@@ -35,7 +36,7 @@ jobs:
     if: github.base_ref == 'master' && github.actor == 'dependabot[bot]'
     steps:
       - name: Merge
-        uses: actions/github-script@0.2.0
+        uses: actions/github-script@v4.0.2
         with:
           script: |
             github.pullRequests.merge({
@@ -43,4 +44,4 @@ jobs:
               repo: context.payload.repository.name,
               pull_number: context.payload.pull_request.number
             })
-          github-token: ${{github.token}}    
+          github-token: ${{github.token}}   
