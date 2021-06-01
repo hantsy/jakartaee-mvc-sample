@@ -19,7 +19,7 @@
         <jakartaee-api.version>8.0.0</jakartaee-api.version>
         
         <!-- Eclipse Krazo -->
-        <krazo.version>1.1.0</krazo.version>
+        <krazo.version>2.0.1</krazo.version>
 
         <!-- Maven Plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
