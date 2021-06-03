@@ -630,7 +630,7 @@
       
                             <systemPropertyVariables>
                                 <payara.home>${project.build.directory}/payara5</payara.home>
-                                <arquillian.launch>glassfish</arquillian.launch>
+                                <!--<arquillian.launch>glassfish</arquillian.launch>-->
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
