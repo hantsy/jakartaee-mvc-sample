@@ -33,7 +33,7 @@
         <arquillian-bom.version>1.6.0.Final</arquillian-bom.version>
         <version.org.jboss.arquillian.drone>2.5.2</version.org.jboss.arquillian.drone>
         <version.org.jboss.arquillian.graphene>2.3.2</version.org.jboss.arquillian.graphene>
-        <htmlunit.version>2.50.0</htmlunit.version>
+        <htmlunit.version>2.52.0</htmlunit.version>
         
         <!-- Glassfish server -->
         <glassfish.version>5.1.0</glassfish.version>
@@ -42,7 +42,7 @@
         <eclipselink.version>2.7.7</eclipselink.version>
 
         <!-- Payara server -->
-        <payara.version>5.2021.4</payara.version>
+        <payara.version>5.2021.5</payara.version>
         <arquillian-payara.version>2.4.4</arquillian-payara.version>
 
         <!-- Wildfly server-->
