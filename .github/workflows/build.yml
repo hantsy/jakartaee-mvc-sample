@@ -15,16 +15,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+    - uses: actions/checkout@v2.3.5
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
       with:
-        java-version: 1.8
+        java-version: 8
+        distribution: 'adopt'
     - name: Build with Maven
       run: mvn clean package --file pom.xml
     
     - name: Run integration test with -Parq-payara-managed
-      run: mvn clean verify -Parq-payara-managed,jersey -X      
+      run: mvn -B -q clean verify -Parq-payara-managed,jersey   
 
     # - name: Run integration test with -Parq-payara-embedded
     #   run: mvn clean verify -Parq-payara-embedded,jersey -X
+

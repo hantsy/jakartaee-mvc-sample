@@ -23,17 +23,17 @@
 
         <!-- Maven Plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <cargo-maven2-plugin.version>1.8.2</cargo-maven2-plugin.version>
-        <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
+        <cargo-maven2-plugin.version>1.8.5</cargo-maven2-plugin.version>
+        <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
         <maven-surefire-report-plugin.version>3.0.0-M5</maven-surefire-report-plugin.version>
 
         <!-- Arquillian BOM -->
         <arquillian-bom.version>1.6.0.Final</arquillian-bom.version>
-        <version.org.jboss.arquillian.drone>2.4.5</version.org.jboss.arquillian.drone>
+        <version.org.jboss.arquillian.drone>2.5.2</version.org.jboss.arquillian.drone>
         <version.org.jboss.arquillian.graphene>2.3.2</version.org.jboss.arquillian.graphene>
-        <htmlunit.version>2.45.0</htmlunit.version>
+        <htmlunit.version>2.54.0</htmlunit.version>
         
         <!-- Glassfish server -->
         <glassfish.version>5.1.0</glassfish.version>
@@ -42,12 +42,12 @@
         <eclipselink.version>2.7.7</eclipselink.version>
 
         <!-- Payara server -->
-        <payara.version>5.2020.6</payara.version>
-        <arquillian-payara-server.version>2.3.1</arquillian-payara-server.version>
+        <payara.version>5.2021.8</payara.version>
+        <arquillian-payara.version>2.4.5</arquillian-payara.version>
 
         <!-- Wildfly server-->
         <wildfly.version>21.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>2.1.0.Beta1</wildfly-maven-plugin.version>
+        <wildfly-maven-plugin.version>3.0.0.Alpha1</wildfly-maven-plugin.version>
         <wildfly-arquillian.version>2.2.0.Final</wildfly-arquillian.version>
         <!--  websockets-jsr and resteasy for client, aligned with Wildfly version. -->
         <undertow-websockets-jsr.version>2.0.26.Final</undertow-websockets-jsr.version>
@@ -57,7 +57,7 @@
         <liberty.runtime.version>20.0.0.1</liberty.runtime.version>     
         <!-- WARNING: 10.15.x.x does not work with openliberty 20.0.0.1 -->
         <derby.version>10.14.2.0</derby.version>
-        <liberty-maven-plugin.version>3.3.1</liberty-maven-plugin.version>
+        <liberty-maven-plugin.version>3.4</liberty-maven-plugin.version>
         
         <!-- By default, skip tests -->
         <skipTests>true</skipTests>
@@ -157,7 +157,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.13.1</version>
+                <version>4.13.2</version>
                 <scope>test</scope>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
@@ -178,7 +178,7 @@
             <dependency>
                 <groupId>org.awaitility</groupId>
                 <artifactId>awaitility</artifactId>
-                <version>4.0.3</version>
+                <version>4.1.1</version>
                 <scope>test</scope>
             </dependency>
 
@@ -186,14 +186,14 @@
             <dependency>
                 <groupId>com.jayway.jsonpath</groupId>
                 <artifactId>json-path</artifactId>
-                <version>2.4.0</version>
+                <version>2.6.0</version>
                 <scope>test</scope>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path-assert -->
             <dependency>
                 <groupId>com.jayway.jsonpath</groupId>
                 <artifactId>json-path-assert</artifactId>
-                <version>2.4.0</version>
+                <version>2.6.0</version>
                 <scope>test</scope>
             </dependency>
 
@@ -202,7 +202,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>3.6.0</version>
+                <version>4.0.0</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -238,7 +238,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>30.0-jre</version>
+            <version>31.0.1-jre</version>
             <scope>test</scope>
         </dependency>
 
@@ -546,7 +546,8 @@
                 <dependency>
                     <groupId>fish.payara.arquillian</groupId>
                     <artifactId>arquillian-payara-server-embedded</artifactId>
-                    <version>${arquillian-payara-server.version}</version>
+                    <version>${arquillian-payara
+                             .version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -578,7 +579,7 @@
                 <dependency>
                     <groupId>fish.payara.arquillian</groupId>
                     <artifactId>payara-client-ee8</artifactId>
-                    <version>${arquillian-payara-server.version}</version>
+                    <version>${arquillian-payara.version}</version>
                     <scope>test</scope>
                 </dependency>
 
@@ -586,7 +587,7 @@
                 <dependency>
                     <groupId>fish.payara.arquillian</groupId>
                     <artifactId>arquillian-payara-server-managed</artifactId>
-                    <version>${arquillian-payara-server.version}</version>
+                    <version>${arquillian-payara.version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -624,12 +625,13 @@
                         <version>${maven-failsafe-plugin.version}</version>
                         <configuration>
                             <environmentVariables>
-                                <GLASSFISH_HOME>${project.build.directory}/payara5</GLASSFISH_HOME>
+                                <payara.home>${project.build.directory}/payara5</payara.home>
                             </environmentVariables>
-                            <!-- This needs tuning 
+      
                             <systemPropertyVariables>
-                                <arquillian.launch>glassfish</arquillian.launch>
-                            </systemPropertyVariables>-->
+                                <payara.home>${project.build.directory}/payara5</payara.home>
+                                <!--<arquillian.launch>glassfish</arquillian.launch>-->
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -644,7 +646,7 @@
                 <dependency>
                     <groupId>fish.payara.arquillian</groupId>
                     <artifactId>arquillian-payara-server-remote</artifactId>
-                    <version>${arquillian-payara-server.version}</version>
+                    <version>${arquillian-payara.version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
