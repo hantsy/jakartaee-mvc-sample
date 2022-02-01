@@ -33,7 +33,7 @@
         <arquillian-bom.version>1.6.0.Final</arquillian-bom.version>
         <version.org.jboss.arquillian.drone>2.5.5</version.org.jboss.arquillian.drone>
         <version.org.jboss.arquillian.graphene>2.5.4</version.org.jboss.arquillian.graphene>
-        <htmlunit.version>2.56.0</htmlunit.version>
+        <htmlunit.version>2.57.0</htmlunit.version>
         
         <!-- Glassfish server -->
         <glassfish.version>5.1.0</glassfish.version>
