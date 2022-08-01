@@ -4,12 +4,12 @@ package com.example.web;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Priority;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.mvc.locale.LocaleResolver;
-import javax.mvc.locale.LocaleResolverContext;
-import javax.ws.rs.core.UriInfo;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.mvc.locale.LocaleResolver;
+import jakarta.mvc.locale.LocaleResolverContext;
+import jakarta.ws.rs.core.UriInfo;
 
 /**
  * Resolver to get the {@link Locale} to use from the requests query param <i>lang</i>.

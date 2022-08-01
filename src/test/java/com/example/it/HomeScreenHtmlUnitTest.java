@@ -10,16 +10,8 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.GenericArchive;
@@ -27,18 +19,22 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
-import org.jboss.shrinkwrap.resolver.api.maven.coordinate.MavenDependencies;
-import static org.junit.Assert.assertTrue;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author hantsy
  */
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class HomeScreenHtmlUnitTest {
 
     private static final Logger LOGGER = Logger.getLogger(HomeScreenHtmlUnitTest.class.getName());
@@ -47,20 +43,20 @@ public class HomeScreenHtmlUnitTest {
 
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
-        File[] extraJars = Maven.resolver().loadPomFromFile("pom.xml")
-                .addDependency(
-                        MavenDependencies
-                                .createDependency("org.eclipse.krazo:krazo-jersey:1.0.0", ScopeType.RUNTIME, false)
-                )
-                //                .resolve(
-                //                        "org.eclipse.krazo:krazo-core:1.0.0",
-                //                        "jakarta.mvc.javax.mvc-api:1.0.0"
-                //                )
-                //                .withTransitivity()
-                .importRuntimeDependencies().resolve().withTransitivity()
-                .asFile();
+//        File[] extraJars = Maven.resolver().loadPomFromFile("pom.xml")
+//                .addDependency(
+//                        MavenDependencies
+//                                .createDependency("org.eclipse.krazo:krazo-jersey:1.0.0", ScopeType.RUNTIME, false)
+//                )
+//                //                .resolve(
+//                //                        "org.eclipse.krazo:krazo-core:1.0.0",
+//                //                        "jakarta.mvc.javax.mvc-api:1.0.0"
+//                //                )
+//                //                .withTransitivity()
+//                .importRuntimeDependencies().resolve().withTransitivity()
+//                .asFile();
         WebArchive war = ShrinkWrap.create(WebArchive.class)
-                .addAsLibraries(extraJars)
+                // .addAsLibraries(extraJars)
                 .addPackage(Bootstrap.class.getPackage())
                 .addPackage(Task.class.getPackage())
                 .addPackage(MvcConfig.class.getPackage())
@@ -74,7 +70,7 @@ public class HomeScreenHtmlUnitTest {
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 // add template resources.
                 .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
-                        .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
+                                .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
                         "/", Filters.include(".*\\.(xhtml|css|xml)$")
                 );
 
@@ -87,7 +83,7 @@ public class HomeScreenHtmlUnitTest {
 
     private WebClient webClient;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         webClient = new WebClient();
         webClient.getOptions()
@@ -104,21 +100,21 @@ public class HomeScreenHtmlUnitTest {
 
         DomElement todoTasksNode = page.getElementById("todotasks");
         List<HtmlElement> taskList = todoTasksNode.getElementsByTagName("li");
-        assertTrue(taskList.size() == 2);
+        assertEquals(2, taskList.size());
 
         if (!taskList.isEmpty()) {
             HtmlElement firstTasNode = taskList.get(0);
 
             List<HtmlElement> buttonNodes = firstTasNode.getElementsByTagName("button");
-            assertTrue(buttonNodes.size() == 1);
+            assertEquals(1, buttonNodes.size());
 
             HtmlButton startButton = (HtmlButton) buttonNodes.get(0);
             WebResponse res = startButton.click().getWebResponse();
 
             if (res.getStatusCode() == 200) {
                 final HtmlPage page2 = webClient.getPage(url + "mvc/tasks");
-                assertTrue(page2.getElementById("todotasks").getElementsByTagName("li").size() == 1);
-                assertTrue(page2.getElementById("doingtasks").getElementsByTagName("li").size() == 1);
+                assertEquals(1, page2.getElementById("todotasks").getElementsByTagName("li").size());
+                assertEquals(1, page2.getElementById("doingtasks").getElementsByTagName("li").size());
             }
         }
 

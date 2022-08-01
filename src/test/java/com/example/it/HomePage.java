@@ -5,14 +5,13 @@
  */
 package com.example.it;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
- *
  * @author hantsy
  */
 public class HomePage {
@@ -34,15 +33,15 @@ public class HomePage {
     }
 
     public void assertTodoTasksSize(int size) {
-        assertTrue(todotasks.findElements(By.cssSelector("li.list-group-item")).size() == size);
+        assertEquals(size, todotasks.findElements(By.cssSelector("li.list-group-item")).size());
     }
 
     public void assertDoingTasksSize(int size) {
-        assertTrue(doingtasks.findElements(By.cssSelector("li.list-group-item")).size() == size);
+        assertEquals(size, doingtasks.findElements(By.cssSelector("li.list-group-item")).size());
     }
 
     public void assertDoneTasksSize(int size) {
-        assertTrue(donetasks.findElements(By.cssSelector("li.list-group-item")).size() == size);
+        assertEquals(size, donetasks.findElements(By.cssSelector("li.list-group-item")).size());
     }
 
 }

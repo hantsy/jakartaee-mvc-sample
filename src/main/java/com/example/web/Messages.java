@@ -1,17 +1,17 @@
 
 import java.util.ResourceBundle;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.mvc.MvcContext;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.mvc.MvcContext;
 //https://www.mvc-spec.org/learn/cookbook/multilang_en.html
 /**
  * Provides I18n messages for the UI per request. To get the correct locale, the method {@link MvcContext#getLocale()}
- * is used. This method uses the built-in {@link javax.mvc.locale.LocaleResolver} of the used MVC Implementation.
+ * is used. This method uses the built-in {@link jakarta.mvc.locale.LocaleResolver} of the used MVC Implementation.
  *
  * @author Tobias Erdle
  * @see MvcContext#getLocale()
- * @see javax.mvc.locale.LocaleResolver
+ * @see jakarta.mvc.locale.LocaleResolver
  */
 @RequestScoped
 @Named("msg")

@@ -3,8 +3,8 @@ package com.example.web;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Named;
-import javax.mvc.RedirectScoped;
+import jakarta.inject.Named;
+import jakarta.mvc.RedirectScoped;
 
 /**
  * Used to transport messages back to the client.

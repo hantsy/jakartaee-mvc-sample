@@ -1,32 +1,29 @@
 name: build
 
-on: 
+on:
   push:
     branches:
-    - master
-    - release/*
+      - master
+      - release/*
   pull_request:
     branches:
-    - master  
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 8
-      uses: actions/setup-java@v3
-      with:
-        java-version: 8
-        distribution: 'adopt'
-    - name: Build with Maven
-      run: mvn clean package --file pom.xml
-    
-    - name: Run integration test with -Parq-payara-managed
-      run: mvn -B -q clean verify -Parq-payara-managed,jersey   
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+          cache: "maven"
+      - name: Build with Maven
+        run: mvn clean package --file pom.xml
 
-    # - name: Run integration test with -Parq-payara-embedded
-    #   run: mvn clean verify -Parq-payara-embedded,jersey -X
+      - name: Run integration test with -Parq-glassfish-managed
+        run: mvn -B -q clean verify -Parq-glassfish-managed
+
 
