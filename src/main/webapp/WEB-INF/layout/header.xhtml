@@ -1,23 +1,18 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <nav id="nav" version="2.0" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" role="navigation">
-        <c:set value="#{request.contextPath}/mvc/tasks" var="tasks" />
-        <c:set value="#{request.contextPath}/mvc/tasks/new" var="tasksNew" />
+                xmlns:ui="jakarta.faces.facelets">
+    <nav id="nav" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" role="navigation">
         <div class="container">
-            <a class="navbar-brand" href="${tasks}">TASKBOARD</a>
-            <button class="navbar-toggler" 
-                    type="button" 
-                    data-toggle="collapse" 
-                    data-target="#navbarDemo" 
-                    aria-controls="#navbarDemo" 
+            <a class="navbar-brand" href="#{mvc.basePath}/tasks">TASKBOARD</a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarDemo"
+                    aria-controls="#navbarDemo"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon">${null}</span>
             </button>
-           
+
             <div id="navbarDemo" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
@@ -25,8 +20,8 @@
                         <a class="nav-link" href="#{mvc.basePath}/tasks">Home</a>
                     </li>
                     <li class="nav-item">
-                         <!--<a class="nav-link" href="#{mvc.uri('TaskController#add')}">Home</a>-->
-                        <a class="nav-link" href="${tasksNew}">
+                        <!--<a class="nav-link" href="#{mvc.uri('TaskController#add')}">Home</a>-->
+                        <a class="nav-link" href="#{mvc.basePath}/tasks/new">
                             <i class="fa fa-plus-circle">${null}</i>
                             New Task
                         </a>

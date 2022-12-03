@@ -3,9 +3,6 @@ package com.example.web;
 import com.example.domain.Task;
 import com.example.domain.TaskRepository;
 import com.example.web.AlertMessage.Type;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -17,17 +14,15 @@ import jakarta.mvc.binding.ParamError;
 import jakarta.mvc.security.CsrfProtected;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import jakarta.ws.rs.BeanParam;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.FormParam;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import static jakarta.ws.rs.core.Response.Status.BAD_REQUEST;
 import org.eclipse.krazo.engine.Viewable;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static jakarta.ws.rs.core.Response.Status.BAD_REQUEST;
 
 @Path("tasks")
 @Controller
@@ -63,7 +58,6 @@ public class TaskController {
         models.put("todotasks", todotasks);
         models.put("doingtasks", doingtasks);
         models.put("donetasks", donetasks);
-
     }
 
     @GET
@@ -94,7 +88,6 @@ public class TaskController {
         if (validationResult.isFailed()) {
             AlertMessage alert = AlertMessage.danger("Validation voilations!");
             validationResult.getAllErrors()
-                    .stream()
                     .forEach((ParamError t) -> {
                         alert.addError(t.getParamName(), "", t.getMessage());
                     });
@@ -136,9 +129,8 @@ public class TaskController {
         log.log(Level.INFO, "updating existed task@id:{0}, form data:{1}", new Object[]{id, form});
 
         if (validationResult.isFailed()) {
-            AlertMessage alert = AlertMessage.danger("Validation voilations!");
+            AlertMessage alert = AlertMessage.danger("Validation violations!");
             validationResult.getAllErrors()
-                    .stream()
                     .forEach((ParamError t) -> {
                         alert.addError(t.getParamName(), "", t.getMessage());
                     });
@@ -171,7 +163,7 @@ public class TaskController {
 
         taskRepository.update(task);
 
-        flashMessage.notify(Type.info, "Task status was updated successfully!");
+        flashMessage.notify(Type.info, "Task status was changed to " + status + "!");
 
         return Response.ok("redirect:tasks").build();
     }
@@ -183,8 +175,7 @@ public class TaskController {
         Task task = taskRepository.findById(id);
         taskRepository.delete(task);
 
-        AlertMessage flashMessage = AlertMessage.danger("Task was deleted!");
-        models.put("flashMessage", flashMessage);
+        flashMessage.notify(Type.danger, "Task was deleted!");
         return Response.ok("redirect:tasks").build();
     }
 

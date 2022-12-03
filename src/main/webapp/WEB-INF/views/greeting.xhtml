@@ -1,8 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:ui="jakarta.faces.facelets"
                 template="/WEB-INF/layout/template.xhtml">
     <ui:define name="pageTitle">Greeting</ui:define>
     <ui:define name="content">
@@ -10,7 +7,7 @@
             <div class="col-md-12">
                 <form id="form" name="form" role="form" class="form" action="#{mvc.uri('greeting-post')}" method="post">
                     <div
-                        class="form-group">
+                            class="form-group">
                         <label class="control-label" for="greeting">Message:</label>
                         <input id="greeting" name="greeting" type="text" class="form-control"/>
                         <div class="help-block">
