@@ -32,7 +32,7 @@
         <krazo.version>3.0.1</krazo.version>
 
         <!-- Arquillian BOM -->
-        <arquillian.version>1.7.0.Alpha14</arquillian.version>
+        <arquillian.version>1.7.0.Final</arquillian.version>
         <arquillian-drone.version>3.0.0-alpha.7</arquillian-drone.version>
         <arquillian-graphene.version>3.0.0-alpha.3</arquillian-graphene.version>
         <arquillian-selenium.version>2.53.0</arquillian-selenium.version>
