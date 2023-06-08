@@ -1,9 +1,9 @@
 package com.example.it;
 
-import com.example.Bootstrap;
-import com.example.config.MvcConfig;
-import com.example.domain.Task;
-import com.example.web.TaskController;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.page.InitialPage;
@@ -16,22 +16,21 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
-import org.jboss.shrinkwrap.resolver.api.maven.coordinate.MavenDependencies;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
-import java.io.File;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.example.Bootstrap;
+import com.example.config.MvcConfig;
+import com.example.domain.Task;
+import com.example.web.TaskController;
 
 /**
  * @author hantsy
  */
 @ExtendWith(ArquillianExtension.class)
+@Disabled // see: https://github.com/arquillian/arquillian-core/issues/312
 public class HomeScreenTest {
 
     private static final Logger LOGGER = Logger.getLogger(HomeScreenTest.class.getName());
