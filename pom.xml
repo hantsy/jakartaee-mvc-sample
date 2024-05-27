@@ -111,7 +111,7 @@
 
             <!-- HtmlUnit -->
             <dependency>
-                <groupId>net.sourceforge.htmlunit</groupId>
+                <groupId>org.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
                 <version>${htmlunit.version}</version>
                 <scope>test</scope>
