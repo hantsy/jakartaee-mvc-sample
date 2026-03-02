@@ -8,8 +8,7 @@
                 <div class="card">
                     <!-- Default panel contents -->
                     <div class="card-header">
-                        <i class="fa fa-list-alt" aria-hidden="true"></i>
-                        TODO
+                        <i class="bi bi-list-task"></i>TODO
                     </div>
                     <div class="card-body">
                         <p class="card-text">Tasks newly added in the backlog.</p>
@@ -23,10 +22,10 @@
                                     <h4>
                                         <span>#${task.id} ${task.name}</span> <span class="pull-right">
                                             <a href="#{mvc.basePath}/tasks/#{task.id}">
-                                                <span class="fa fa-file" aria-hidden="true"></span>
+                                                <i class="bi bi-file-earmark-text"></i>
                                             </a> 
                                             <a href="#{mvc.basePath}/tasks/#{task.id}/edit">
-                                                <span class="fa fa-edit" aria-hidden="true"></span>
+                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                         </span>
                                     </h4>
@@ -36,8 +35,7 @@
                                             <input type="hidden" name="_method" value="PUT"></input>
                                             <input type="hidden" name="status" value="DOING"></input>
                                             <button type="submit" class="btn btn-sm btn-primary">
-                                                <span class="fa fa-play" aria-hidden="true"></span>
-                                                START
+                                                <i class="bi bi-play-fill"></i> START
                                             </button>
                                         </form>
                                     </div>
@@ -52,8 +50,7 @@
                 <div class="card">
                     <!-- Default panel contents -->
                     <div class="card-header">
-                        <i class="fa fa-cog" aria-hidden="true"></i>
-                        WORK IN PROGRESS
+                        <i class="bi bi-hourglass-split"></i> WORK IN PROGRESS
                     </div>
                     <div class="card-body">
                         <p class="card-text">Tasks had been assigned and started.</p>
@@ -71,8 +68,7 @@
                                             <input type="hidden" name="_method" value="PUT"></input>
                                             <input type="hidden" name="status" value="DONE"></input>
                                             <button type="submit" class="btn btn-sm btn-success">
-                                                <span class="fa fa-check" aria-hidden="true"></span>
-                                                DONE
+                                                <i class="bi bi-check-circle-fill">${null}</i> DONE
                                             </button>
                                         </form>
                                     </div>
@@ -86,8 +82,7 @@
                 <div class="card">
                     <!-- Default panel contents -->
                     <div class="card-header">
-                        <i class="fa fa-check-circle" aria-hidden="true"></i>
-                        DONE
+                        <i class="bi bi-check2-square">${null}</i> DONE
                     </div>
                     <div class="card-body">
                         <p class="card-text">Tasks had been done successfully.</p>
@@ -104,8 +99,7 @@
                                         <form action="#{mvc.basePath}/tasks/#{task.id}" method="post">
                                             <input type="hidden" name="_method" value="DELETE"></input>
                                             <button type="submit" class="btn btn-sm btn-danger">
-                                                <span class="fa fa-trash" aria-hidden="true"></span>
-                                                DELETE
+                                                <i class="bi bi-trash">${null}</i> DELETE
                                             </button>
                                         </form>
                                     </div>
