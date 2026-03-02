@@ -11,7 +11,7 @@ import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.jboss.arquillian.junit5.container.annotation.ArquillianTest;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.GenericArchive;
@@ -21,7 +21,6 @@ import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author hantsy
  */
-@ExtendWith(ArquillianExtension.class)
+@ArquillianTest
 public class HomeScreenHtmlUnitTest {
 
     private static final Logger LOGGER = Logger.getLogger(HomeScreenHtmlUnitTest.class.getName());

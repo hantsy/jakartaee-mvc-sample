@@ -17,57 +17,46 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Maven Plugins -->
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
-        <cargo-maven3-plugin.version>1.10.15</cargo-maven3-plugin.version>
-        <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
-        <maven-surefire-report-plugin.version>3.5.2</maven-surefire-report-plugin.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-war-plugin.version>3.5.1</maven-war-plugin.version>
+        <cargo-maven3-plugin.version>1.10.26</cargo-maven3-plugin.version>
+        <maven-dependency-plugin.version>3.10.0</maven-dependency-plugin.version>
+        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.5.5</maven-failsafe-plugin.version>
+        <maven-surefire-report-plugin.version>3.5.5</maven-surefire-report-plugin.version>
 
         <!-- Jakarta EE API -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
+        <jakarta.mvc-api.version>2.1.0</jakarta.mvc-api.version>     
 
         <!-- Eclipse Krazo -->
         <krazo.version>3.0.1</krazo.version>
 
         <!-- Arquillian BOM -->
-        <arquillian.version>1.9.3.Final</arquillian.version>
-        <!-- Since Aruqillian core 1.9.0.Final, need to add Aruqillian Jakarta BOM which aligns to Jakarta EE -->
-    	<arquillian-jakarta-bom.version>10.0.0.Final</arquillian-jakarta-bom.version>
-    	<shrinkwrap-resolver-bom.version>3.3.2</shrinkwrap-resolver-bom.version>  
-        <arquillian-drone.version>3.0.0-alpha.8</arquillian-drone.version>
-        <arquillian-graphene.version>3.0.0-alpha.4</arquillian-graphene.version>
+        <arquillian.version>1.10.0.Final</arquillian.version>
+        <!-- Since Arquillian core 1.9.0.Final, need to add Arquillian Jakarta BOM which aligns to Jakarta EE -->
+        <arquillian-jakarta-bom.version>10.0.0.Final</arquillian-jakarta-bom.version>
+        <shrinkwrap-resolver-bom.version>3.3.5</shrinkwrap-resolver-bom.version>
+        <arquillian-drone.version>3.0.0.Final</arquillian-drone.version>
+        <arquillian-graphene.version>3.0.0.Final</arquillian-graphene.version>
+
+        <!-- tests -->
+        <junit-bom.version>6.0.3</junit-bom.version>
+        <mockito-bom.version>5.21.0</mockito-bom.version>
+        <awaitility.version>4.3.0</awaitility.version>
+        <hamcrest.version>3.0</hamcrest.version> 
 
         <!-- Glassfish server -->
-        <glassfish.version>7.0.19</glassfish.version>
-        <arquillian-glassfish-jakarta.version>7.0.10</arquillian-glassfish-jakarta.version>
+        <glassfish.version>7.0.24</glassfish.version>
+        <arquillian-glassfish.version>7.0.14</arquillian-glassfish.version>
         <jersey.version>3.1.0</jersey.version>
-        <eclipselink.version>4.0.4</eclipselink.version>
-
-        <!-- Payara server -->
-        <payara.version>6.2022.1</payara.version>
-        <arquillian-payara.version>3.0.alpha7</arquillian-payara.version>
-
-        <!-- Wildfly server-->
-        <wildfly.version>35.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>5.0.1.Final</wildfly-maven-plugin.version>
-        <wildfly-arquillian.version>5.0.0.Alpha6</wildfly-arquillian.version>
-        <!--  websockets-jsr and resteasy for client, aligned with Wildfly version. -->
-        <undertow-websockets-jsr.version>2.0.26.Final</undertow-websockets-jsr.version>
-        <resteasy.version>6.2.0.Final</resteasy.version>
-
-        <!-- OpenLiberty server -->
-        <liberty.runtime.version>22.0.0.12</liberty.runtime.version>
-        <!-- WARNING: 10.15.x.x does not work with openliberty 20.0.0.1 -->
-        <derby.version>10.14.2.0</derby.version>
-        <liberty-maven-plugin.version>3.11.1</liberty-maven-plugin.version>
+        <eclipselink.version>4.0.9</eclipselink.version>
 
         <!-- By default, skip tests -->
         <skipTests>true</skipTests>
 
-        <!-- PhantomJS will be our default browser if no profile is specified-->
-        <browser>phantomjs</browser>
+        <!-- HtmlUnit will be our default browser if no profile is specified-->
+        <browser>htmlunit</browser>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -127,71 +116,56 @@
             <dependency>
                 <groupId>jakarta.mvc</groupId>
                 <artifactId>jakarta.mvc-api</artifactId>
-                <version>2.1.0</version>
+                <version>${jakarta.mvc-api.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.eclipse.krazo/krazo-jersey -->
             <dependency>
                 <groupId>org.eclipse.krazo</groupId>
                 <artifactId>krazo-core</artifactId>
                 <version>${krazo.version}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.krazo</groupId>
                 <artifactId>krazo-jersey</artifactId>
+                <scope>provided</scope>
                 <version>${krazo.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.krazo</groupId>
                 <artifactId>krazo-resteasy</artifactId>
+                <scope>provided</scope>
                 <version>${krazo.version}</version>
             </dependency>
-
-            <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>5.11.3</version>
-                <scope>test</scope>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
-
             <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest</artifactId>
-                <version>3.0</version>
+                <version>${hamcrest.version}</version>
                 <scope>test</scope>
             </dependency>
-
             <!-- https://mvnrepository.com/artifact/org.awaitility/awaitility -->
             <dependency>
                 <groupId>org.awaitility</groupId>
                 <artifactId>awaitility</artifactId>
-                <version>4.2.2</version>
+                <version>${awaitility.version}</version>
                 <scope>test</scope>
             </dependency>
-
-            <!-- JSON path -->
-            <dependency>
-                <groupId>com.jayway.jsonpath</groupId>
-                <artifactId>json-path</artifactId>
-                <version>2.9.0</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path-assert -->
-            <dependency>
-                <groupId>com.jayway.jsonpath</groupId>
-                <artifactId>json-path-assert</artifactId>
-                <version>2.9.0</version>
-                <scope>test</scope>
-            </dependency>
-
             <!-- Mockito -->
             <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
             <dependency>
                 <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>5.14.2</version>
-                <scope>test</scope>
+                <artifactId>mockito-bom</artifactId>
+                <version>${mockito-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -203,6 +177,10 @@
         <dependency>
             <groupId>org.eclipse.krazo</groupId>
             <artifactId>krazo-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.krazo</groupId>
+            <artifactId>krazo-jersey</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.mvc</groupId>
@@ -265,6 +243,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.eclipse.persistence</groupId>
+                            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+                            <version>${eclipselink.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -323,138 +310,15 @@
     </build>
 
     <profiles>
-
-        <profile>
-            <id>wildfly</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.eclipse.krazo</groupId>
-                    <artifactId>krazo-resteasy</artifactId>
-                </dependency>
-            </dependencies>
-            <properties>
-                <!-- Wildfly server -->
-                <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
-                <jboss-as.home>${project.build.directory}/wildfly-preview-${wildfly.version}</jboss-as.home>
-            </properties>
-            <build>
-                <plugins>
-
-                    <!-- unpack a copy of WildFly-->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <version>${maven-dependency-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>unpack</id>
-                                <phase>process-classes</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>org.wildfly</groupId>
-                                            <artifactId>${wildfly.artifactId}</artifactId>
-                                            <version>${wildfly.version}</version>
-                                            <type>zip</type>
-                                            <overWrite>false</overWrite>
-                                            <outputDirectory>${project.build.directory}</outputDirectory>
-                                        </artifactItem>
-                                    </artifactItems>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- The WildFly plugin deploys your war to a local running WildFly container -->
-                    <!-- To use, run: mvn package wildfly:deploy -->
-                    <!-- For Jakarta EE 9, use `wildfly-preview-dist` as artifactId instead to start and deploy applications-->
-                    <!-- Run: mvn clean wildfly:run -PWildfly -Dwildfly.artifactId=wildfly-preview-dist -Dwildfly.version=22.0.0.Alpha1 -->
-                    <!-- or set the `jboss-as.home` to run: mvn clean wildfly:run -PWildfly -Djboss-as.home=D:\appsvr\wildfly-preview-22.0.0.Alpha1-->
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
-                        <version>${wildfly-maven-plugin.version}</version>
-                    </plugin>
-                </plugins>
-            </build>
-            <repositories>
-                <repository>
-                    <id>opensaml</id>
-                    <url>https://build.shibboleth.net/nexus/content/repositories/releases/</url>
-                </repository>
-            </repositories>
-        </profile>
-        <profile>
-            <id>openliberty</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.eclipse.krazo</groupId>
-                    <artifactId>krazo-resteasy</artifactId>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <version>${maven-dependency-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>copy</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>copy</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.derby</groupId>
-                                    <artifactId>derby</artifactId>
-                                    <version>${derby.version}</version>
-                                    <type>jar</type>
-                                    <overWrite>false</overWrite>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources
-                            </outputDirectory>
-                        </configuration>
-                    </plugin>
-                    <!-- Enable liberty-maven-plugin -->
-                    <plugin>
-                        <groupId>io.openliberty.tools</groupId>
-                        <artifactId>liberty-maven-plugin</artifactId>
-                        <version>${liberty-maven-plugin.version}</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
         <profile>
             <id>glassfish</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <cargo.zipUrlInstaller.downloadDir>${project.basedir}/installs</cargo.zipUrlInstaller.downloadDir>
+                <cargo.zipUrlInstaller.downloadDir>${project.basedir}/../installs</cargo.zipUrlInstaller.downloadDir>
             </properties>
             <dependencies>
-                <!-- https://mvnrepository.com/artifact/org.eclipse.krazo/krazo-jersey -->
-                <dependency>
-                    <groupId>org.eclipse.krazo</groupId>
-                    <artifactId>krazo-jersey</artifactId>
-                    <version>${krazo.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.eclipse.krazo</groupId>
-                    <artifactId>krazo-core</artifactId>
-                    <version>${krazo.version}</version>
-                    <scope>provided</scope>
-                </dependency>
             </dependencies>
             <build>
                 <plugins>
@@ -502,21 +366,9 @@
             </properties>
             <dependencies>
                 <dependency>
-                    <groupId>org.eclipse.krazo</groupId>
-                    <artifactId>krazo-jersey</artifactId>
-                    <version>${krazo.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.eclipse.krazo</groupId>
-                    <artifactId>krazo-core</artifactId>
-                    <version>${krazo.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.github.hantsy.arquillian-container-glassfish-jakarta</groupId>
-                    <artifactId>arquillian-glassfish-managed-jakarta</artifactId>
-                    <version>${arquillian-glassfish-jakarta.version}</version>
+                    <groupId>io.github.hantsy.arquillian</groupId>
+                    <artifactId>arquillian-glassfish-managed</artifactId>
+                    <version>${arquillian-glassfish.version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -576,12 +428,6 @@
                 <browser>chrome</browser>
             </properties>
         </profile>
-        <profile>
-            <id>chromeheadless</id>
-            <properties>
-                <browser>chromeheadless</browser>
-            </properties>
-        </profile>
     </profiles>
     <reporting>
         <plugins>
@@ -592,10 +438,4 @@
             </plugin>
         </plugins>
     </reporting>
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
 </project>

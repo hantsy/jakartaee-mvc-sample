@@ -1,14 +1,14 @@
 package com.example.it;
 
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import com.example.Bootstrap;
+import com.example.config.MvcConfig;
+import com.example.domain.Task;
+import com.example.web.TaskController;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.graphene.page.Page;
-import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.jboss.arquillian.junit5.container.annotation.ArquillianTest;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.GenericArchive;
@@ -18,18 +18,16 @@ import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 
-import com.example.Bootstrap;
-import com.example.config.MvcConfig;
-import com.example.domain.Task;
-import com.example.web.TaskController;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author hantsy
  */
-@ExtendWith(ArquillianExtension.class)
+@ArquillianTest
 @Disabled // see: https://github.com/arquillian/arquillian-core/issues/312
 public class HomeScreenTest {
 
@@ -40,19 +38,19 @@ public class HomeScreenTest {
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
         // Glassfish 7.0 includes built-in MVC
-       // File[] extraJars = Maven.resolver().loadPomFromFile("pom.xml")
+        // File[] extraJars = Maven.resolver().loadPomFromFile("pom.xml")
 
-                //.addDependency(
-                //        MavenDependencies
-                //                .createDependency("org.eclipse.krazo:krazo-jersey:3.0.1", ScopeType.RUNTIME, false)
-                //)
-                //                .resolve(
-                //                        "org.eclipse.krazo:krazo-core:1.0.0",
-                //                        "jakarta.mvc.javax.mvc-api:1.0.0"
-                //                )
-                //                .withTransitivity()
-                //.importRuntimeDependencies().resolve().withTransitivity()
-                ////.asFile();
+        //.addDependency(
+        //        MavenDependencies
+        //                .createDependency("org.eclipse.krazo:krazo-jersey:3.0.1", ScopeType.RUNTIME, false)
+        //)
+        //                .resolve(
+        //                        "org.eclipse.krazo:krazo-core:1.0.0",
+        //                        "jakarta.mvc.javax.mvc-api:1.0.0"
+        //                )
+        //                .withTransitivity()
+        //.importRuntimeDependencies().resolve().withTransitivity()
+        ////.asFile();
         WebArchive war = ShrinkWrap.create(WebArchive.class)
                 //.addAsLibraries(extraJars)
                 .addPackage(Bootstrap.class.getPackage())
@@ -86,7 +84,7 @@ public class HomeScreenTest {
     HomePage homePage;
 
     @Test
-    public void testHomePage(@InitialPage IndexPage idxPage) {
+    public void testHomePage(@ArquillianResource @InitialPage IndexPage idxPage) {
         idxPage.clickStartButton();
         homePage.assertOnHomePage();
         homePage.assertTodoTasksSize(2);
