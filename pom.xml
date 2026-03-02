@@ -13,7 +13,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Maven Plugins -->
@@ -26,11 +26,11 @@
         <maven-surefire-report-plugin.version>3.5.5</maven-surefire-report-plugin.version>
 
         <!-- Jakarta EE API -->
-        <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <jakarta.mvc-api.version>2.1.0</jakarta.mvc-api.version>     
+        <jakartaee-api.version>11.0.0</jakartaee-api.version>
+        <jakarta.mvc-api.version>3.0.0</jakarta.mvc-api.version>
 
         <!-- Eclipse Krazo -->
-        <krazo.version>3.0.1</krazo.version>
+        <krazo.version>4.0.0</krazo.version>
 
         <!-- Arquillian BOM -->
         <arquillian.version>1.10.0.Final</arquillian.version>
@@ -47,10 +47,10 @@
         <hamcrest.version>3.0</hamcrest.version> 
 
         <!-- Glassfish server -->
-        <glassfish.version>7.0.24</glassfish.version>
+        <glassfish.version>8.0.0</glassfish.version>
         <arquillian-glassfish.version>7.0.14</arquillian-glassfish.version>
-        <jersey.version>3.1.0</jersey.version>
-        <eclipselink.version>4.0.9</eclipselink.version>
+        <jersey.version>4.0.0</jersey.version>
+        <eclipselink.version>5.0.0-B13</eclipselink.version>
 
         <!-- By default, skip tests -->
         <skipTests>true</skipTests>
@@ -117,6 +117,7 @@
                 <groupId>jakarta.mvc</groupId>
                 <artifactId>jakarta.mvc-api</artifactId>
                 <version>${jakarta.mvc-api.version}</version>
+                <scope>provided</scope>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.eclipse.krazo/krazo-jersey -->
             <dependency>
@@ -227,6 +228,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -328,7 +330,7 @@
                         <version>${cargo-maven3-plugin.version}</version>
                         <configuration>
                             <container>
-                                <containerId>glassfish7x</containerId>
+                                <containerId>glassfish8x</containerId>
                                 <zipUrlInstaller>
                                     <url>
                                         https://github.com/eclipse-ee4j/glassfish/releases/download/${glassfish.version}/glassfish-${glassfish.version}.zip
@@ -338,7 +340,7 @@
                             </container>
                             <configuration>
                                 <!-- the configuration used to deploy -->
-                                <home>${project.build.directory}/glassfish7x-home</home>
+                                <home>${project.build.directory}/glassfish8x-home</home>
                                 <properties>
                                     <cargo.remote.password></cargo.remote.password>
                                     <cargo.glassfish.removeDefaultDatasource>true
@@ -409,7 +411,7 @@
                                 --add-opens java.base/java.lang=ALL-UNNAMED
                             </argLine>
                             <environmentVariables>
-                                <GLASSFISH_HOME>${project.build.directory}/glassfish7</GLASSFISH_HOME>
+                                <GLASSFISH_HOME>${project.build.directory}/glassfish8</GLASSFISH_HOME>
                             </environmentVariables>
                         </configuration>
                     </plugin>

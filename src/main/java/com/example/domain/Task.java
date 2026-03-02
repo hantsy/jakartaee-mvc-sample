@@ -129,48 +129,14 @@ public class Task implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.name);
-        hash = 67 * hash + Objects.hashCode(this.description);
-        hash = 67 * hash + Objects.hashCode(this.status);
-        hash = 67 * hash + Objects.hashCode(this.createdDate);
-        hash = 67 * hash + Objects.hashCode(this.lastModifiedDate);
-        return hash;
+    public boolean equals(Object o) {
+        if (!(o instanceof Task task)) return false;
+        return Objects.equals(name, task.name);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Task other = (Task) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (this.status != other.status) {
-            return false;
-        }
-        if (!Objects.equals(this.createdDate, other.createdDate)) {
-            return false;
-        }
-        if (!Objects.equals(this.lastModifiedDate, other.lastModifiedDate)) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return Objects.hashCode(name);
     }
 
     @PrePersist

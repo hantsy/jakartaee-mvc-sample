@@ -4,6 +4,7 @@ import com.example.Bootstrap;
 import com.example.config.MvcConfig;
 import com.example.domain.Task;
 import com.example.web.TaskController;
+import org.eclipse.krazo.engine.FaceletsViewEngine;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.html.DomElement;
@@ -60,6 +61,7 @@ public class HomeScreenHtmlUnitTest {
                 .addPackage(Task.class.getPackage())
                 .addPackage(MvcConfig.class.getPackage())
                 .addPackage(TaskController.class.getPackage())
+                .addClass(FaceletsViewEngine.class)
                 //Add JPA persistence configuration.
                 //WARN: In a war archive, persistence.xml should be put into /WEB-INF/classes/META-INF/, not /META-INF
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")

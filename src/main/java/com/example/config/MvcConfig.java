@@ -1,7 +1,11 @@
 package com.example.config;
 
+import jakarta.mvc.engine.ViewEngine;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @ApplicationPath("mvc")
 public class MvcConfig extends Application {
@@ -33,14 +37,16 @@ public class MvcConfig extends Application {
      *
      *
      * ViewEngine.VIEW_FOLDER
-     *
+     * <p>
      * Csrf.CSRF_PROTECTION
-     *
+     * <p>
      * Csrf.CSRF_HEADER_NAME
-     *
-     *
-     *
-     * @Override public Map<String, Object> getProperties() { final Map<String, Object> map = new HashMap<>();
-     * map.put(ViewEngine.VIEW_FOLDER, "/jsp/"); return map; }
      */
+
+//    @Override
+//    public Map<String, Object> getProperties() {
+//        final Map<String, Object> map = new HashMap<>();
+//        map.put(ViewEngine.VIEW_EXTENSION, "xhtml");
+//        return map;
+//    }
 }

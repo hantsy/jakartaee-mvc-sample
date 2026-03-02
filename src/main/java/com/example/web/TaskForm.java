@@ -50,41 +50,22 @@ public class TaskForm implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.id);
-        hash = 61 * hash + Objects.hashCode(this.name);
-        hash = 61 * hash + Objects.hashCode(this.description);
-        return hash;
+    public boolean equals(Object o) {
+        if (!(o instanceof TaskForm taskForm)) return false;
+        return Objects.equals(id, taskForm.id) && Objects.equals(name, taskForm.name) && Objects.equals(description, taskForm.description);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final TaskForm other = (TaskForm) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return Objects.hash(id, name, description);
     }
 
     @Override
     public String toString() {
-        return "TaskForm{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+        return "TaskForm{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
-  
 }

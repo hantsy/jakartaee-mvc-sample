@@ -4,6 +4,7 @@ import com.example.Bootstrap;
 import com.example.config.MvcConfig;
 import com.example.domain.Task;
 import com.example.web.TaskController;
+import org.eclipse.krazo.engine.FaceletsViewEngine;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.page.InitialPage;
@@ -57,6 +58,7 @@ public class HomeScreenTest {
                 .addPackage(Task.class.getPackage())
                 .addPackage(MvcConfig.class.getPackage())
                 .addPackage(TaskController.class.getPackage())
+                .addClass(FaceletsViewEngine.class)
                 //Add JPA persistence configuration.
                 //WARN: In a war archive, persistence.xml should be put into /WEB-INF/classes/META-INF/, not /META-INF
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")

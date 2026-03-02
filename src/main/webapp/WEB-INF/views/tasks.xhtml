@@ -32,6 +32,7 @@
                                     <p>${task.description}</p>
                                     <div>
                                         <form action="#{mvc.basePath}/tasks/#{task.id}/status" method="post">
+                                            <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
                                             <input type="hidden" name="_method" value="PUT"></input>
                                             <input type="hidden" name="status" value="DOING"></input>
                                             <button type="submit" class="btn btn-sm btn-primary">
@@ -65,6 +66,7 @@
                                     <p>${task.description}</p>
                                     <div>
                                         <form action="#{mvc.basePath}/tasks/#{task.id}/status" method="post">
+                                            <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
                                             <input type="hidden" name="_method" value="PUT"></input>
                                             <input type="hidden" name="status" value="DONE"></input>
                                             <button type="submit" class="btn btn-sm btn-success">
@@ -97,6 +99,7 @@
                                     <p>${task.description}</p>
                                     <div>
                                         <form action="#{mvc.basePath}/tasks/#{task.id}" method="post">
+                                            <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
                                             <input type="hidden" name="_method" value="DELETE"></input>
                                             <button type="submit" class="btn btn-sm btn-danger">
                                                 <i class="bi bi-trash">${null}</i> DELETE
