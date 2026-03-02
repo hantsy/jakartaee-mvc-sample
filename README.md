@@ -1,18 +1,16 @@
-#  Jakarta EE MVC Sample 
-
-
+#  JakartaEE MVC Sample 
 
 [![build](https://github.com/hantsy/jakartaee-mvc-sample/actions/workflows/build.yml/badge.svg)](https://github.com/hantsy/jakartaee-mvc-sample/actions/workflows/build.yml)
 
-As an alternative of Jakarta Faces which is used to build web UI with components, [Jakarta MVC](https://www.mvc-spec.org/) spec is similar with the transactional MVC framework, such as Apache Struts,  Spring MVC, etc. which provides capability for building action-based web applications.
+As an alternative to Jakarta Faces, which is used to build web UIs with components, the [Jakarta MVC](https://www.mvc-spec.org/) spec is similar to traditional MVC frameworks, such as Apache Struts and Spring MVC, and provides the capability to build action-based web applications.
 
 The repository has already been upgraded to Jakarta EE 10.
 
-* For the Jakarta EE 8 based codes was archived and also tagged with [v1.0 tag](https://github.com/hantsy/jakartaee-mvc-sample/releases/tag/v1.0).
+* The Jakarta EE 8-based code was archived and also tagged with [v1.0 tag](https://github.com/hantsy/jakartaee-mvc-sample/releases/tag/v1.0).
 
-[Jakarta MVC](https://www.mvc-spec.org/) is based on the existing  JAX-RS specs, it reuses the JAX-RS APIs, and add some additional APIs to the specific *action* features.
+[Jakarta MVC](https://www.mvc-spec.org/) is based on the existing  JAX-RS specs, reuses the JAX-RS APIs, and adds additional APIs for specific *action* features.
 
-[Eclipse Krazo](https://projects.eclipse.org/projects/ee4j.krazo) is the only implementation of Jakarta MVC, it supports the following Jakarta REST implementors.
+[Eclipse Krazo](https://projects.eclipse.org/projects/ee4j.krazo) is the only implementation of Jakarta MVC, which supports the following Jakarta REST implementors.
 
 * Jersey (Glassfish/Payara)
 * Resteasy( Wildfly)
@@ -20,13 +18,15 @@ The repository has already been upgraded to Jakarta EE 10.
 
 ![home](./home.png)
 
+![task list](./tasks.png)
+
 ## Docs
 
 * [Building a web application with Jakarta MVC and Eclipse Krazo(Jakarta EE 8)](./docs/guide.md)
 
 ## Build
 
-1. Clone a copy of the source codes.
+1. Clone a copy of the source code.
 
    ```bash
    git clone https://github.com/hantsy/jakartaee-mvc-sample
