@@ -30,7 +30,7 @@
         <jakarta.mvc-api.version>3.0.0</jakarta.mvc-api.version>
 
         <!-- Eclipse Krazo -->
-        <krazo.version>4.0.0</krazo.version>
+        <krazo.version>4.0.1</krazo.version>
 
         <!-- Arquillian BOM -->
         <arquillian.version>1.10.1.Final</arquillian.version>
