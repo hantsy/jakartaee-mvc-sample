@@ -37,7 +37,7 @@
         <!-- Since Arquillian core 1.9.0.Final, need to add Arquillian Jakarta BOM which aligns to Jakarta EE -->
         <arquillian-jakarta-bom.version>10.0.0.Final</arquillian-jakarta-bom.version>
         <shrinkwrap-resolver-bom.version>3.3.5</shrinkwrap-resolver-bom.version>
-        <arquillian-drone.version>3.0.0.Final</arquillian-drone.version>
+        <arquillian-drone.version>3.0.1.Final</arquillian-drone.version>
         <arquillian-graphene.version>3.0.0.Final</arquillian-graphene.version>
 
         <!-- tests -->
