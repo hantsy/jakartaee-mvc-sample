@@ -41,7 +41,7 @@
         <arquillian-graphene.version>3.0.1.Final</arquillian-graphene.version>
 
         <!-- tests -->
-        <junit-bom.version>6.0.3</junit-bom.version>
+        <junit-bom.version>6.1.1</junit-bom.version>
         <mockito-bom.version>5.23.0</mockito-bom.version>
         <awaitility.version>4.3.0</awaitility.version>
         <hamcrest.version>3.0</hamcrest.version> 
