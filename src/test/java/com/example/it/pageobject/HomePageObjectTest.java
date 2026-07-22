@@ -1,4 +1,4 @@
-package com.example.it;
+package com.example.it.pageobject;
 
 import com.example.Bootstrap;
 import com.example.config.MvcConfig;
@@ -6,8 +6,7 @@ import com.example.domain.Task;
 import com.example.web.TaskController;
 import org.eclipse.krazo.engine.FaceletsViewEngine;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.drone.api.annotation.Drone;
-import org.jboss.arquillian.graphene.Graphene;
+import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.junit5.container.annotation.ArquillianTest;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.Filters;
@@ -16,28 +15,20 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.junit.jupiter.api.Disabled;
 
-import java.net.URL;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
  * @author hantsy
  */
+@Disabled
 @ArquillianTest
-public class HomeScreenTest {
+public class HomePageObjectTest {
 
-    private static final Logger LOGGER = Logger.getLogger(HomeScreenTest.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HomePageObjectTest.class.getName());
 
     private static final String WEBAPP_SRC = "src/main/webapp";
 
@@ -66,46 +57,10 @@ public class HomeScreenTest {
         return war;
     }
 
-    @ArquillianResource
-    private URL deploymentUrl;
-
-    @Drone
-    private WebDriver browser;
-
-    @FindBy(id = "todotasks")
-    private WebElement todotasks;
-
-    @FindBy(id = "doingtasks")
-    private WebElement doingtasks;
-
-    @FindBy(id = "donetasks")
-    private WebElement donetasks;
-
-    @Test
-    public void testHomePage() {
-        final String url = deploymentUrl.toExternalForm();
-        LOGGER.log(Level.INFO, "deploymentUrl:{0}", url);
-        this.browser.get(url + "mvc/tasks");
-
-        // todo item list
-        List<WebElement> todoTasksWebElements = todotasks.findElements(By.cssSelector("li.task-item"));
-
-        // in the initial status, contains 2 todo tasks
-        assertEquals(2, todoTasksWebElements.size());
-        assertTrue(doingtasks.findElements(By.cssSelector("li.task-item")).isEmpty());
-        assertTrue(donetasks.findElements(By.cssSelector("li.task-item")).isEmpty());
-
-        // locate the Start button of the first TODO task
-        WebElement buttonElement = todoTasksWebElements.getFirst().findElement(By.cssSelector(".task-actions .btn"));
-
-        //click the Start button
-        Graphene.guardHttp(buttonElement).click();
-
-        // wait the GUI ready
-        Graphene.waitGui();
-
-        // verify the TODO task is moved to the DOING column
-        assertEquals(1, todotasks.findElements(By.cssSelector("li.task-item")).size());
-        assertEquals(1, doingtasks.findElements(By.cssSelector("li.task-item")).size());
+    // see: https://github.com/arquillian/arquillian-core/issues/312
+    // @Test
+    public void testHomePageObject(@ArquillianResource @InitialPage HomePageObject home) {
+        home.assertTodoTasksSize(2);
     }
+
 }

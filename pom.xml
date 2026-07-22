@@ -55,8 +55,8 @@
         <!-- By default, skip tests -->
         <skipTests>true</skipTests>
 
-        <!-- HtmlUnit will be our default browser if no profile is specified-->
-        <browser>htmlunit</browser>
+        <!-- Chrome headless will be our default browser if no profile is specified-->
+        <browser>chromeheadless</browser>
     </properties>
     <dependencyManagement>
         <dependencies>

@@ -24,6 +24,6 @@ jobs:
         run: mvn clean package --file pom.xml
 
       - name: Run integration test with -Parq-glassfish-managed
-        run: mvn -B -q clean verify -Parq-glassfish-managed,chrome
+        run: mvn -B -q clean verify -Parq-glassfish-managed
 
 

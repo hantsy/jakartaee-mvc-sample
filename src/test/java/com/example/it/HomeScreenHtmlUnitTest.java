@@ -21,6 +21,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author hantsy
  */
 @ArquillianTest
+@Disabled("Bootstrap parsing errors with HtmlUnit")
 public class HomeScreenHtmlUnitTest {
 
     private static final Logger LOGGER = Logger.getLogger(HomeScreenHtmlUnitTest.class.getName());
