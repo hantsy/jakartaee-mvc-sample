@@ -27,7 +27,7 @@
 
         <!-- Jakarta EE API -->
         <jakartaee-api.version>11.0.0</jakartaee-api.version>
-        <jakarta.mvc-api.version>3.0.0</jakarta.mvc-api.version>
+        <jakarta.mvc-api.version>3.0.1</jakarta.mvc-api.version>
 
         <!-- Eclipse Krazo -->
         <krazo.version>4.0.1</krazo.version>
