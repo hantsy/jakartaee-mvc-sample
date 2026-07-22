@@ -1,33 +1,54 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="jakarta.faces.facelets"
                 template="/WEB-INF/layout/template.xhtml">
-    <ui:define name="pageTitle"> EDIT TASK (ID: #{task.id})</ui:define>
+    <ui:define name="pageTitle">Edit Task</ui:define>
     <ui:define name="content">
-        <div class="row">
-            <div class="col-md-12">
-                <form id="form" name="form" role="form" class="form" action="#{mvc.basePath}/tasks" method="post">
-                    <input type="hidden" name="${mvc.csrf.name}"
-                           value="${mvc.csrf.token}"/>
-                    <input type="hidden" name="_method" value="PUT"/>
-                    <input type="hidden" name="id" value="${task.id}"/>
-                    <div class="form-group">
-                        <label class="control-label" for="name">Task Name:</label>
-                        <input id="name" name="name" type="text" class="form-control" value="${task.name}"/>
-                        <div class="help-block">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="description">Task Description:</label>
-                        <textarea id="description" name="description" class="form-control"
-                                  rows="8">${task.description}</textarea>
-                        <div class="help-block">
-                        </div>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="form-card">
 
-                    <div class="form-group">
-                        <button id="submitTask" type="submit" class="btn btn-lg btn-primary">Save Task</button>
-                    </div>
-                </form>
+                    <!-- Task metadata for existing task -->
+                    <ui:fragment rendered="#{not empty task.id}">
+                        <div class="d-flex align-items-center gap-2 mb-4 pb-3 border-bottom">
+                            <span class="badge bg-secondary py-2 px-3 fs-6 rounded-pill">ID: ${task.id}</span>
+                            <ui:fragment rendered="#{not empty task.status}">
+                                <span class="status-badge #{task.status.toString().toLowerCase()}">
+                                    <i class="bi #{task.status.toString() == 'TODO' ? 'bi-list-task' : (task.status.toString() == 'DOING' ? 'bi-hourglass-split' : 'bi-check2-square')}"></i>
+                                    ${task.status}
+                                </span>
+                            </ui:fragment>
+                        </div>
+                    </ui:fragment>
+
+                    <form id="form" name="form" role="form" action="#{mvc.basePath}/tasks/#{task.id}" method="post">
+                        <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
+                        <input type="hidden" name="_method" value="PUT"/>
+                        <input type="hidden" name="id" value="${task.id}"/>
+
+                        <div class="form-group">
+                            <label class="text-uppercase" for="name">Task Name</label>
+                            <input id="name" name="name" type="text" class="form-control"
+                                   value="${task.name}"
+                                   placeholder="What needs to be done?"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-uppercase" for="description">Task Description</label>
+                            <textarea id="description" name="description" class="form-control"
+                                      rows="6"
+                                      placeholder="Add some details about this task...">${task.description}</textarea>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-3 mt-4 pt-3 border-top">
+                            <button id="submitTask" type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-save"></i>Save Task
+                            </button>
+                            <a href="#{mvc.basePath}/tasks" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-x-lg"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </ui:define>

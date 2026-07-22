@@ -11,9 +11,7 @@ This repository has been updated to **Jakarta EE 11 / Jakarta MVC 3.0**.
 
 The following screenshots show the running example application, which is a simple task list manager. The home page displays the list of tasks, and the "Add Task" page allows users to create new tasks.
 
-![home](./home.png)
 
-![task list](./tasks.png)
 
 ### Older releases
 
@@ -21,6 +19,10 @@ The following screenshots show the running example application, which is a simpl
 * **Jakarta EE 8:** see the [v1.0 archive release](https://github.com/hantsy/jakartaee-mvc-sample/releases/tag/v1.0).
 
 ---
+
+## Screenshots
+
+![task list](./tasks.png)
 
 ## Background
 
@@ -33,7 +35,7 @@ Jakarta MVC is built on top of the Jakarta REST API, reusing its annotations and
 * ~~Apache CXF~~ – support removed in MVC 2.0
 
 > [!Warning]
-> Jakarta MVC 3.0 / Eclipse Krazo 4.0 replaced Facelets with Jakarta Pages as the default view engine. Because Jakarta Pages lacks a composite-view layout mechanism, this sample restores the deleted `FaceletsViewEngine` and continues using the original Facelets views.
+> Jakarta MVC 3.0 / Eclipse Krazo 4.0 replaced Facelets with Jakarta Pages as the default view engine. Because Jakarta Pages lacks a composite-view layout mechanism, this sample restores the deleted `FaceletsViewEngine` from Eclipse Krazo and continues using the original Facelets views.
 
 
 ## Documentation

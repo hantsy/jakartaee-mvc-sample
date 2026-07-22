@@ -1,5 +1,6 @@
 package com.example.web;
 
+import com.example.domain.Task;
 import java.io.Serializable;
 import java.util.Objects;
 import jakarta.mvc.binding.MvcBinding;
@@ -25,6 +26,8 @@ public class TaskForm implements Serializable {
     @MvcBinding
     private String description;
 
+    private Task.Status status;
+
     public Long getId() {
         return id;
     }
@@ -47,6 +50,14 @@ public class TaskForm implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Task.Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Task.Status status) {
+        this.status = status;
     }
 
     @Override

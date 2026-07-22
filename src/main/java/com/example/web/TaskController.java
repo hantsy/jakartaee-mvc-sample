@@ -118,6 +118,7 @@ public class TaskController {
         form.setId(task.getId());
         form.setName(task.getName());
         form.setDescription(task.getDescription());
+        form.setStatus(task.getStatus());
         models.put("task", form);
         return new Viewable("edit.xhtml");
     }

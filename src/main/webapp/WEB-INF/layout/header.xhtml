@@ -1,28 +1,26 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="jakarta.faces.facelets">
-    <nav id="nav" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" role="navigation">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" role="navigation">
         <div class="container">
-            <a class="navbar-brand" href="#{mvc.basePath}/tasks">TASKBOARD</a>
-            <button class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarDemo"
-                    aria-controls="#navbarDemo"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">${null}</span>
+            <a class="navbar-brand text-uppercase" href="#{mvc.basePath}/tasks">
+                <i class="bi bi-kanban me-2"></i>TaskBoard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div id="navbarDemo" class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <!--<a class="nav-link" href="${tasks}">Home</a>-->
-                        <a class="nav-link" href="#{mvc.basePath}/tasks">Home</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#{mvc.basePath}/tasks">
+                            <i class="bi bi-house-door me-1"></i> Home
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <!--<a class="nav-link" href="#{mvc.uri('TaskController#add')}">Home</a>-->
                         <a class="nav-link" href="#{mvc.basePath}/tasks/new">
-                            <i class="bi bi-plus-circle-fill"></i> New Task</a>
+                            <i class="bi bi-plus-circle me-1"></i> New Task
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -1,63 +1,246 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Taskboard — A Jakarta MVC Example</title>
 
-        <style>
-            html,
-            body {
-                height: 100%;
-            }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap"/>
 
-            #page-content {
-                flex: 1 0 auto;
-            }
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"/>
 
-            #sticky-footer {
-                flex-shrink: none;
-            }
+    <style>
+        :root {
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-glow: rgba(99, 102, 241, 0.15);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --radius-md: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-            /* Other Classes for Page Styling */
+        html, body {
+            height: 100%;
+        }
 
-            footer {
-                margin-top: 15px;
-                background-color: #f5f5f5;
-            }
-        </style>
-        <title>Hello, world!</title>
-    </head>
-    <body>
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
 
-        <div id="page-content" class="mt-auto">
-            <div class="container text-center">
-                <div class="row justify-content-center">
-                    <div class="col-md-7">
-                        <h1 class="display-1">Task board</h1>
-                        <p class="lead">
-                            A sample application demonstrates Jakarta EE MVC specification and Eclipse Krazo(RI).
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(236, 72, 153, 0.2) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, rgba(6, 182, 212, 0.25) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #page-content {
+            flex: 1 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 3.5rem 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+        }
+
+        .hero-title {
+            font-weight: 800;
+            font-size: clamp(3rem, 8vw, 5rem);
+            background: linear-gradient(135deg, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            text-shadow: none;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 650px;
+            line-height: 1.7;
+        }
+
+        .hero-subtitle strong {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.85rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+            border-color: rgba(99, 102, 241, 0.6);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            padding: 0.85rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            flex-shrink: none;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer,
+        footer .text-muted {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+
+        footer a {
+            transition: var(--transition);
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        footer a:hover {
+            color: #ffffff !important;
+            transform: scale(1.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page-content">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-card">
+                        <h1 class="hero-title mb-4">Taskboard</h1>
+                        <h2 class="hero-tagline mb-4">A Jakarta MVC Example</h2>
+                        <p class="hero-subtitle mx-auto mb-5">
+                            Jakarta MVC is the standard <strong>action-based</strong> web framework for the Jakarta EE platform.
+                            Built on top of <strong>Jakarta RESTful Web Services</strong>, it integrates seamlessly with
+                            <strong>CDI</strong> and <strong>Bean Validation</strong>, offering a clean and familiar
+                            programming model for building modern web applications.
                         </p>
-                        <p class="text-center">
-                            <a class="btn btn-lg btn-success" href="mvc/tasks">Start Here</a>
-                        </p>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <a class="btn btn-primary" href="mvc/tasks">
+                                <i class="bi bi-kanban"></i> Launch Demo App
+                            </a>
+                            <a class="btn btn-outline-secondary" href="https://jakarta.ee/specifications/mvc/" target="_blank" rel="noopener">
+                                <i class="bi bi-journal-text"></i> MVC Specification
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer id="sticky-footer" class="fixed-bottom fixed-bottom mt-auto py-3">
-            <div class="container text-center">
-                <small><strong>Copyright</strong>@ hantsy@gmail.com</small>
-            </div>
-        </footer>
+    </div>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    </body>
+    <footer class="mt-auto py-4">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <div>
+                    <span class="text-muted">© 2026 <strong>Taskboard</strong>. Designed by </span>
+                    <a href="mailto:hantsy@gmail.com" class="text-decoration-none text-secondary fw-semibold">Hantsy Bai</a>
+                </div>
+                <div class="d-flex align-items-center gap-1">
+                    <a class="text-muted mx-2" href="https://x.com/hantsy" target="_blank" rel="noopener noreferrer" aria-label="X @hantsy"><i class="bi bi-twitter-x fs-5"></i></a>
+                    <a class="text-muted mx-2" href="https://github.com/hantsy" target="_blank" rel="noopener noreferrer" aria-label="GitHub @hantsy"><i class="bi bi-github fs-5"></i></a>
+                    <a class="text-muted mx-2" href="https://www.linkedin.com/in/hantsy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn hantsy"><i class="bi bi-linkedin fs-5"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

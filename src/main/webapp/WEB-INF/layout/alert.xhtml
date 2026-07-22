@@ -1,23 +1,38 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="jakarta.faces.facelets">
+    <!-- Flash Messages (success, warning, info, danger) -->
     <ui:fragment rendered="#{not empty flashMessage and not empty flashMessage.text}">
-        <div class="alert alert-${flashMessage.type} alert-dismissible"
+        <div class="alert alert-dismissible fade show d-flex align-items-center justify-content-between #{flashMessage.type == 'success' ? 'alert-success' : (flashMessage.type == 'warning' ? 'alert-warning' : (flashMessage.type == 'danger' ? 'alert-danger' : 'alert-info'))}"
              role="alert">
-            ${flashMessage.text}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <i class="bi bi-x-circle">${null}</i>
-            </button>
+            <div class="d-flex align-items-center">
+                <ui:fragment rendered="#{flashMessage.type == 'success'}">
+                    <i class="bi bi-check-circle-fill me-2 fs-5"></i>
+                </ui:fragment>
+                <ui:fragment rendered="#{flashMessage.type == 'warning'}">
+                    <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+                </ui:fragment>
+                <ui:fragment rendered="#{flashMessage.type == 'danger'}">
+                    <i class="bi bi-exclamation-octagon-fill me-2 fs-5"></i>
+                </ui:fragment>
+                <ui:fragment rendered="#{flashMessage.type == 'info'}">
+                    <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+                </ui:fragment>
+                <span>${flashMessage.text}</span>
+            </div>
+            <button type="button" class="btn-close position-static m-0" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </ui:fragment>
 
-    <ui:fragment rendered="#{not empty errors}">
-        <ui:repeat value="#{errors.errors}" var="error">
-            <div class="alert alert-danger alert-dismissible"
+    <!-- Validation / Binding Errors -->
+    <ui:fragment rendered="#{not empty errors and not empty errors.errors}">
+        <ui:repeat var="error" value="#{errors.errors}">
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center justify-content-between"
                  role="alert">
-                <strong>${error.field}</strong>: ${error.message}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <i class="bi bi-x-circle">${null}</i>
-                </button>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-exclamation-octagon-fill me-2 fs-5"></i>
+                    <span><strong class="me-1">${error.field}:</strong> ${error.message}</span>
+                </div>
+                <button type="button" class="btn-close position-static m-0" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </ui:repeat>
     </ui:fragment>
