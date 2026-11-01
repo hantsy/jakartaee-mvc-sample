@@ -47,7 +47,7 @@
         <hamcrest.version>3.0</hamcrest.version> 
 
         <!-- Glassfish server -->
-        <glassfish.version>8.0.4</glassfish.version>
+        <glassfish.version>8.0.5</glassfish.version>
         <arquillian-glassfish.version>7.1.1</arquillian-glassfish.version>
         <jersey.version>4.0.0</jersey.version>
         <eclipselink.version>5.0.0-B13</eclipselink.version>
